@@ -1,0 +1,269 @@
+2025-11-23 10:42:53,153 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 10:42:59,863 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 10:42:59,863 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 10:43:05,876 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 10:43:05,876 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 10:43:11,635 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 10:43:11,636 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 10:45:33,900 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 10:45:33,900 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 10:45:45,071 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 10:45:54,295 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 10:45:54,295 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 10:46:12,297 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 10:46:22,031 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 10:46:22,032 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 10:47:29,120 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 10:47:35,833 - utils.password_manager - ERROR - Error verifying password: Invalid salt
+2025-11-23 10:47:35,834 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 10:47:35,834 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 10:47:56,832 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 10:48:05,324 - utils.password_manager - ERROR - Error verifying password: Invalid salt
+2025-11-23 10:48:05,325 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 10:48:05,325 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 10:49:59,824 - utils.password_manager - ERROR - Error verifying password: Invalid salt
+2025-11-23 10:49:59,825 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 10:49:59,825 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 10:51:22,756 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 10:51:31,936 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 10:51:31,937 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 10:51:42,833 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 10:51:42,833 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 10:51:49,525 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 10:51:49,526 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 10:52:25,550 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 10:52:32,345 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 10:52:32,346 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 10:52:36,864 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 10:52:36,864 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 10:53:41,487 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 10:53:48,557 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 10:53:48,558 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 10:54:55,363 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 10:55:11,888 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 10:55:12,966 - __main__ - ERROR - An unexpected error occurred:
+
+transparency is not allowed in tuple color ('transparent', 'transparent'), use 'transparent'
+2025-11-23 10:55:46,633 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 10:57:24,198 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 10:57:31,644 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 10:57:32,548 - __main__ - ERROR - An unexpected error occurred:
+
+name 'COLOR_TRANSPARENT' is not defined
+2025-11-23 10:58:36,779 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 10:58:45,198 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 10:58:45,199 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 10:58:51,415 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 10:58:52,547 - frames.base_frame - INFO - Displayed 0 patients
+2025-11-23 10:58:52,548 - __main__ - ERROR - An unexpected error occurred:
+
+PatientHistoryFrame.__init__() missing 4 required positional arguments: 'prescription_manager', 'medical_records_manager', 'appointment_manager', and 'sales_manager'
+2025-11-23 11:00:53,134 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 11:01:00,844 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 11:01:02,136 - frames.base_frame - INFO - Displayed 0 patients
+2025-11-23 11:01:02,488 - __main__ - ERROR - An unexpected error occurred:
+
+'dict' object has no attribute 'list_doctors'
+2025-11-23 11:02:41,849 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 11:02:48,309 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 11:02:49,300 - frames.base_frame - INFO - Displayed 0 patients
+2025-11-23 11:04:33,933 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 11:04:39,889 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 11:04:40,817 - frames.base_frame - INFO - Displayed 0 patients
+2025-11-23 11:05:56,808 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 11:06:04,368 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 11:06:05,374 - frames.base_frame - INFO - Displayed 0 patients
+2025-11-23 11:19:46,875 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 11:19:56,042 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 11:19:56,042 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 11:20:00,298 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 11:20:01,674 - frames.base_frame - INFO - Displayed 0 patients
+2025-11-23 11:23:20,313 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 11:23:30,598 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 11:23:31,602 - frames.base_frame - INFO - Displayed 0 patients
+2025-11-23 11:24:39,985 - frames.base_frame - INFO - Success: Patient Jed luis Perez registered successfully!
+2025-11-23 11:24:49,079 - frames.base_frame - INFO - Success: Selected: Perez, Jed luis
+2025-11-23 11:26:15,126 - frames.workflow_frame - ERROR - Error saving examination: 'MedicalRecordsManager' object has no attribute 'add_medical_record'
+2025-11-23 11:26:15,127 - frames.base_frame - ERROR - Error: 'MedicalRecordsManager' object has no attribute 'add_medical_record'
+2025-11-23 11:30:20,459 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 11:30:26,149 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 11:30:27,279 - frames.base_frame - INFO - Displayed 1 patients
+2025-11-23 11:31:32,566 - frames.base_frame - INFO - Success: Patient Mark Masambal registered successfully!
+2025-11-23 11:31:35,960 - frames.base_frame - INFO - Success: Selected: Masambal, Mark
+2025-11-23 11:32:00,777 - frames.base_frame - INFO - Success: Examination saved successfully!
+2025-11-23 11:37:42,711 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 11:37:51,133 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 11:37:52,308 - frames.base_frame - INFO - Displayed 2 patients
+2025-11-23 11:42:33,584 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 11:42:40,604 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 11:42:42,285 - frames.base_frame - INFO - Displayed 2 patients
+2025-11-23 11:43:24,665 - frames.base_frame - INFO - Success: Patient added successfully (Auto-categorized as: Adult)
+2025-11-23 11:43:28,408 - frames.base_frame - INFO - Displayed 3 patients
+2025-11-23 11:45:26,718 - frames.base_frame - ERROR - Validation Error: Patient ID is required
+2025-11-23 11:45:30,018 - frames.base_frame - INFO - Success: Patient 3 loaded successfully
+2025-11-23 11:45:54,133 - frames.base_frame - INFO - Success: Patient 1 loaded successfully
+2025-11-23 11:45:59,470 - frames.base_frame - INFO - Success: Patient 2 loaded successfully
+2025-11-23 11:51:55,292 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 11:52:01,560 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 11:53:28,474 - frames.base_frame - INFO - Success: Selected: Barrion, James Peter
+2025-11-23 11:57:19,402 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 11:57:27,992 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 11:57:27,992 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 11:57:33,090 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 12:04:38,716 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 12:04:46,553 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 12:04:47,459 - __main__ - ERROR - An unexpected error occurred:
+
+'WorkflowFrame' object has no attribute 'register_patient'
+2025-11-23 12:09:10,890 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 12:09:18,867 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 12:09:41,290 - frames.base_frame - INFO - Success: Selected: Barrion, James Peter
+2025-11-23 12:15:04,431 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 12:15:11,646 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 12:21:11,033 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 12:21:17,516 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 12:24:50,314 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 12:24:57,489 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 14:51:51,560 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 14:52:02,640 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 14:52:04,689 - __main__ - ERROR - An unexpected error occurred:
+
+name 'COLOR_FRAME_BG' is not defined
+2025-11-23 14:53:29,672 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 14:53:52,297 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 15:01:24,395 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 15:01:58,675 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 15:02:09,149 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 15:03:06,913 - frames.base_frame - ERROR - Error: Please select a patient first
+2025-11-23 15:06:12,498 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 15:06:48,958 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 15:14:27,319 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 15:14:27,320 - __main__ - INFO - Creating table: doctors...
+2025-11-23 15:14:27,332 - __main__ - ERROR - Error during sample data setup: 1273 (HY000): Unknown collation: 'utf8mb4_0900_ai_ci'
+2025-11-23 15:15:57,059 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 15:15:57,060 - __main__ - INFO - Creating table: doctors...
+2025-11-23 15:15:57,069 - __main__ - INFO - Table doctors created successfully.
+2025-11-23 15:15:57,070 - __main__ - INFO - Creating table: archived_doctors...
+2025-11-23 15:15:57,077 - __main__ - INFO - Table archived_doctors created successfully.
+2025-11-23 15:16:11,032 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 15:20:43,599 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 15:20:53,490 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 15:26:31,575 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 15:26:39,280 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 15:34:56,416 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 15:35:03,478 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 15:40:36,225 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 15:40:44,701 - backend.managers - WARNING - Failed login attempt for user: admin
+2025-11-23 15:40:44,701 - __main__ - WARNING - Failed login attempt with username: admin
+2025-11-23 15:40:49,365 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 15:44:42,269 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 15:44:51,804 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 15:48:55,529 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 15:49:01,954 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 15:50:07,818 - frames.base_frame - INFO - Success: Patient Janah Escanilla registered successfully!
+2025-11-23 15:51:24,268 - frames.base_frame - INFO - Success: Patient Rhonnalyn Ortillaga registered successfully!
+2025-11-23 15:51:29,756 - frames.base_frame - INFO - Success: Selected: Ortillaga, Rhonnalyn
+2025-11-23 15:55:03,066 - frames.workflow_frame - ERROR - Error completing examination: CTkEntry.get() takes 1 positional argument but 3 were given
+2025-11-23 15:55:03,067 - frames.base_frame - ERROR - Error: CTkEntry.get() takes 1 positional argument but 3 were given
+2025-11-23 16:02:43,058 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 16:02:54,466 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 16:03:17,709 - frames.base_frame - ERROR - Error: Please select a patient first
+2025-11-23 16:03:25,625 - frames.base_frame - ERROR - Error: Please select a patient first
+2025-11-23 16:03:37,552 - frames.base_frame - ERROR - Error: Please select a patient first
+2025-11-23 16:05:44,118 - frames.base_frame - ERROR - Error: Please select a patient first
+2025-11-23 16:07:37,654 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 16:07:49,880 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 16:09:09,829 - frames.workflow_frame - ERROR - Error adding charge: 'BillingManager' object has no attribute 'add_billing'
+2025-11-23 16:09:09,831 - frames.base_frame - ERROR - Error: 'BillingManager' object has no attribute 'add_billing'
+2025-11-23 16:13:51,253 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 16:14:03,263 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 16:15:17,192 - frames.base_frame - ERROR - Error: No patient selected
+2025-11-23 16:15:34,789 - frames.base_frame - ERROR - Error: No patient selected
+2025-11-23 16:15:58,536 - frames.base_frame - INFO - Discount Applied: Discount feature coming soon!
+2025-11-23 16:16:54,042 - frames.base_frame - INFO - Visit Completed: Sales visit for Ortillaga, Rhonnalyn completed successfully!
+
+Patient can now proceed to checkout.
+2025-11-23 16:16:57,633 - frames.workflow_frame - ERROR - Error completing sales visit: 'WorkflowFrame' object has no attribute 'glasses_price'
+2025-11-23 16:16:57,634 - frames.base_frame - ERROR - Error: 'WorkflowFrame' object has no attribute 'glasses_price'
+2025-11-23 16:22:32,619 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 16:22:43,834 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 16:23:33,574 - frames.base_frame - ERROR - Error: No patient selected
+2025-11-23 19:28:02,945 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 19:28:12,081 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 19:29:00,988 - frames.workflow_frame - ERROR - Error completing examination: 'WorkflowFrame' object has no attribute 'doctors_list'
+2025-11-23 19:29:00,988 - frames.base_frame - ERROR - Error: 'WorkflowFrame' object has no attribute 'doctors_list'
+2025-11-23 19:31:49,317 - frames.base_frame - INFO - Success: Patient John Eman Bautista registered successfully!
+2025-11-23 19:31:54,217 - frames.base_frame - INFO - Success: Selected: Bautista, John Eman
+2025-11-23 19:32:52,720 - frames.workflow_frame - ERROR - Error completing examination: 'WorkflowFrame' object has no attribute 'doctors_list'
+2025-11-23 19:32:52,721 - frames.base_frame - ERROR - Error: 'WorkflowFrame' object has no attribute 'doctors_list'
+2025-11-23 19:33:42,050 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 19:33:51,645 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 19:34:50,467 - frames.base_frame - INFO - Success: Patient John Perez registered successfully!
+2025-11-23 19:35:36,795 - frames.workflow_frame - ERROR - Error completing examination: MedicalRecordsManager.add_record() got an unexpected keyword argument 'record_type'
+2025-11-23 19:35:36,796 - frames.base_frame - ERROR - Error: MedicalRecordsManager.add_record() got an unexpected keyword argument 'record_type'
+2025-11-23 19:41:35,642 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 19:41:42,045 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 19:42:42,409 - frames.workflow_frame - ERROR - Error completing examination: PrescriptionManager.create_prescription() got an unexpected keyword argument 'sph_od'
+2025-11-23 19:42:42,410 - frames.base_frame - ERROR - Error: PrescriptionManager.create_prescription() got an unexpected keyword argument 'sph_od'
+2025-11-23 19:44:40,955 - frames.followup_frame - ERROR - Error scheduling follow-up: MySQL Connection not available.
+2025-11-23 19:48:07,265 - database.db_connection - ERROR - DB connection error (host=127.0.0.1): 2003 (HY000): Can't connect to MySQL server on '127.0.0.1:3306' (10061)
+2025-11-23 19:48:07,266 - database.db_connection - CRITICAL - Failed to connect to database. Last error: 2003 (HY000): Can't connect to MySQL server on '127.0.0.1:3306' (10061) (tried hosts: 127.0.0.1)
+2025-11-23 19:48:07,266 - __main__ - ERROR - Failed to connect to database:
+
+Failed to connect to database. Last error: 2003 (HY000): Can't connect to MySQL server on '127.0.0.1:3306' (10061) (tried hosts: 127.0.0.1)
+2025-11-23 19:48:48,303 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 19:48:54,701 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 19:50:02,054 - backend.managers - INFO - Prescription created for patient 7 by doctor 3
+2025-11-23 19:50:02,058 - frames.workflow_frame - ERROR - Error completing examination: bad entry index "1.0"
+2025-11-23 19:50:02,059 - frames.base_frame - ERROR - Error: bad entry index "1.0"
+2025-11-23 19:55:43,596 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 19:55:49,693 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 19:56:54,595 - backend.managers - INFO - Prescription created for patient 7 by doctor 2
+2025-11-23 19:56:54,597 - frames.workflow_frame - ERROR - Error completing examination: bad entry index "1.0"
+2025-11-23 19:56:54,598 - frames.base_frame - ERROR - Error: bad entry index "1.0"
+2025-11-23 20:07:56,226 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 20:08:02,066 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 20:08:48,439 - backend.managers - INFO - Prescription created for patient 2 by doctor 2
+2025-11-23 20:08:48,443 - frames.workflow_frame - ERROR - Error completing examination: bad entry index "1.0"
+2025-11-23 20:08:48,443 - frames.base_frame - ERROR - Error: bad entry index "1.0"
+2025-11-23 20:10:47,934 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 20:10:53,825 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 20:11:44,165 - backend.managers - INFO - Prescription created for patient 3 by doctor 2
+2025-11-23 20:11:44,169 - frames.workflow_frame - ERROR - Error completing examination: bad entry index "1.0"
+2025-11-23 20:11:44,169 - frames.base_frame - ERROR - Error: bad entry index "1.0"
+2025-11-23 20:25:01,414 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 20:25:07,859 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 20:25:36,931 - frames.workflow_frame - ERROR - Error loading products: 'WorkflowFrame' object has no attribute 'product_price'
+2025-11-23 20:26:42,110 - backend.managers - INFO - Prescription created for patient 39 by doctor 3
+2025-11-23 20:26:42,112 - frames.workflow_frame - ERROR - Error completing examination: bad entry index "1.0"
+2025-11-23 20:26:42,113 - frames.base_frame - ERROR - Error: bad entry index "1.0"
+2025-11-23 20:26:45,534 - frames.workflow_frame - ERROR - Error loading products: invalid command name ".!ctkframe2.!ctkframe2.!workflowframe.!ctkframe2.!ctkframe2.!ctkframe3.!ctkframe.!canvas.!ctkscrollableframe.!ctkframe.!ctkentry2.!entry"
+2025-11-23 20:32:29,857 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 20:32:37,590 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 20:39:06,945 - backend.managers - INFO - Prescription created for patient 36 by doctor 2
+2025-11-23 20:39:06,948 - frames.workflow_frame - ERROR - Error completing examination: bad entry index "1.0"
+2025-11-23 20:39:06,948 - frames.base_frame - ERROR - Error: bad entry index "1.0"
+2025-11-23 20:43:45,349 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 20:43:51,267 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 20:45:21,129 - frames.base_frame - INFO - Success: Selected: Carranza, Xavier
+2025-11-23 20:46:08,592 - backend.managers - INFO - Prescription created for patient 47 by doctor 3
+2025-11-23 20:46:08,594 - frames.workflow_frame - ERROR - Error completing examination: bad entry index "1.0"
+2025-11-23 20:46:08,595 - frames.base_frame - ERROR - Error: bad entry index "1.0"
+2025-11-23 20:46:46,659 - frames.workflow_frame - ERROR - Error recording sale: 1054 (42S22): Unknown column 'Patient_ID' in 'field list'
+2025-11-23 20:46:46,659 - frames.base_frame - ERROR - Error: Failed to record sale: 1054 (42S22): Unknown column 'Patient_ID' in 'field list'
+2025-11-23 20:50:48,941 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 20:51:00,070 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 20:52:59,439 - backend.managers - INFO - Prescription created for patient 39 by doctor 3
+2025-11-23 20:52:59,442 - frames.workflow_frame - ERROR - Error completing examination: bad entry index "1.0"
+2025-11-23 20:52:59,442 - frames.base_frame - ERROR - Error: bad entry index "1.0"
+2025-11-23 20:54:33,604 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 20:54:41,704 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 20:55:36,202 - backend.managers - INFO - Prescription created for patient 30 by doctor 3
+2025-11-23 21:04:52,434 - database.db_connection - INFO - Connected to database (host=127.0.0.1)
+2025-11-23 21:05:00,561 - backend.managers - INFO - User 'admin' authenticated successfully
+2025-11-23 21:05:37,626 - backend.managers - ERROR - Failed to create invoice: 1054 (42S22): Unknown column 'Sale_ID' in 'where clause'
+2025-11-23 21:07:26,361 - frames.base_frame - INFO - Visit Completed: Sales visit for Carranza, Xavier completed successfully!
+
+Patient can now proceed to checkout.
+2025-11-23 21:07:27,557 - frames.workflow_frame - ERROR - Error completing sales visit: 'WorkflowFrame' object has no attribute 'followup_type'
+2025-11-23 21:07:27,558 - frames.base_frame - ERROR - Error: 'WorkflowFrame' object has no attribute 'followup_type'
