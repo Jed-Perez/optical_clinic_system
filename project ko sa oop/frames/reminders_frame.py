@@ -8,6 +8,8 @@ class RemindersFrame(ctk.CTkFrame):
         self.managers = managers
         self.reminder_manager = managers['rem_m']
         self.patient_manager = managers['pm']
+        self.appointment_manager = managers['am']
+        self.appointments_map = {}
         self.build()
 
     def build(self):
@@ -20,7 +22,7 @@ class RemindersFrame(ctk.CTkFrame):
         main = ctk.CTkFrame(self)
         main.pack(fill='both', expand=True, padx=15, pady=15)
 
-        left = ctk.CTkFrame(main, fg_color=("white", "#0f0f0f"), width=350)
+        left = ctk.CTkFrame(main, fg_color=("white", "#0f0f0f"), width=400)
         left.pack(side='left', fill='both', expand=False, padx=(0, 7.5), pady=0)
         left.pack_propagate(False)
 
@@ -30,21 +32,22 @@ class RemindersFrame(ctk.CTkFrame):
         frm = ctk.CTkFrame(left, fg_color=("transparent"))
         frm.pack(padx=20, pady=10, fill='x')
 
-        ctk.CTkLabel(frm, text='Appointment ID', font=('Segoe UI', 12, 'bold')).pack(anchor='w', pady=(10, 3))
-        self.appointment_id = ctk.CTkEntry(frm, placeholder_text='Enter Appointment ID', height=35, font=('Segoe UI', 12))
-        self.appointment_id.pack(fill='x', pady=(0, 10))
+        ctk.CTkLabel(frm, text='Select Appointment *', font=('Segoe UI', 12, 'bold')).pack(anchor='w', pady=(10, 3))
+        self.appointment_combo = ctk.CTkComboBox(frm, values=self.get_appointments_list(), state='readonly', height=40, font=('Segoe UI', 12), command=self.on_appointment_selected)
+        self.appointment_combo.set('Select Appointment')
+        self.appointment_combo.pack(fill='x', pady=(0, 10))
 
-        ctk.CTkLabel(frm, text='Patient ID', font=('Segoe UI', 12, 'bold')).pack(anchor='w', pady=(10, 3))
-        self.patient_id = ctk.CTkEntry(frm, placeholder_text='Enter Patient ID', height=35, font=('Segoe UI', 12))
-        self.patient_id.pack(fill='x', pady=(0, 10))
+        ctk.CTkLabel(frm, text='Patient Info', font=('Segoe UI', 12, 'bold')).pack(anchor='w', pady=(10, 3))
+        self.patient_info_label = ctk.CTkLabel(frm, text='Select an appointment first', font=('Segoe UI', 11), justify='left', fg_color=("#e0e0e0", "#2a2a2a"), corner_radius=5)
+        self.patient_info_label.pack(fill='x', pady=(0, 10), padx=5, ipady=8)
 
         ctk.CTkLabel(frm, text='Days Before Appointment', font=('Segoe UI', 12, 'bold')).pack(anchor='w', pady=(10, 3))
-        self.days_before = ctk.CTkEntry(frm, placeholder_text='e.g., 1 for one day before', height=35, font=('Segoe UI', 12))
-        self.days_before.insert(0, "1")
+        self.days_before = ctk.CTkComboBox(frm, values=['1', '2', '3', '7'], state='readonly', height=40, font=('Segoe UI', 12))
+        self.days_before.set('1')
         self.days_before.pack(fill='x', pady=(0, 20))
 
-        ctk.CTkButton(frm, text='➕ Create Reminder', command=self.create_reminder, height=40, font=('Segoe UI', 12, 'bold')).pack(fill='x', pady=5)
-        ctk.CTkButton(frm, text='🔄 Refresh List', command=self.view_reminders, height=40, font=('Segoe UI', 12, 'bold')).pack(fill='x', pady=5)
+        ctk.CTkButton(frm, text='➕ Create Reminder', command=self.create_reminder, height=45, font=('Segoe UI', 13, 'bold')).pack(fill='x', pady=5)
+        ctk.CTkButton(frm, text='🔄 Refresh List', command=self.refresh_data, height=45, font=('Segoe UI', 13, 'bold')).pack(fill='x', pady=5)
 
         right = ctk.CTkFrame(main, fg_color=("white", "#0f0f0f"))
         right.pack(side='right', fill='both', expand=True, padx=(7.5, 0), pady=0)
@@ -56,14 +59,69 @@ class RemindersFrame(ctk.CTkFrame):
 
         self.view_reminders()
 
+    def get_appointments_list(self):
+        """Get list of upcoming appointments"""
+        try:
+            appointments = self.appointment_manager.list_appointments()
+            self.appointments_map.clear()
+            
+            appointment_list = []
+            for appt in appointments:
+                if appt.get('Status') == 'Scheduled':
+                    # Format: "ID: Patient Name - Doctor Name (Date Time)"
+                    patient_id = appt.get('Patient_ID')
+                    patient = self.patient_manager.get_patient(patient_id)
+                    patient_name = f"{patient.get('Surname', '')}, {patient.get('FirstName', '')}" if patient else f"Patient {patient_id}"
+                    
+                    doctor_id = appt.get('Doctor_ID')
+                    # Get doctor name from managers
+                    doctors = self.managers['dm'].list_doctors()
+                    doctor_name = next((d['Name'] for d in doctors if d['Doctor_ID'] == doctor_id), f"Doctor {doctor_id}")
+                    
+                    date_str = str(appt.get('Appointment_Date', ''))
+                    time_str = str(appt.get('Appointment_Time', ''))
+                    
+                    display = f"{appt['Appointment_ID']}: {patient_name} - {doctor_name} ({date_str} {time_str})"
+                    appointment_list.append(display)
+                    self.appointments_map[display] = appt
+            
+            return appointment_list if appointment_list else ['No scheduled appointments']
+        except Exception as e:
+            print(f"Error loading appointments: {e}")
+            return ['Error loading appointments']
+    
+    def on_appointment_selected(self, choice=None):
+        """When an appointment is selected, show patient info"""
+        try:
+            selected = self.appointment_combo.get()
+            if selected in self.appointments_map:
+                appt = self.appointments_map[selected]
+                patient_id = appt.get('Patient_ID')
+                patient = self.patient_manager.get_patient(patient_id)
+                
+                if patient:
+                    info = f"ID: {patient['Patient_ID']}\n"
+                    info += f"Name: {patient.get('Surname', '')}, {patient.get('FirstName', '')}\n"
+                    info += f"Contact: {patient.get('Contact', 'N/A')}"
+                    self.patient_info_label.configure(text=info)
+        except Exception as e:
+            self.patient_info_label.configure(text=f"Error: {str(e)}")
+
     def create_reminder(self):
         try:
-            appt_id = self.appointment_id.get().strip()
-            patient_id = self.patient_id.get().strip()
+            selected = self.appointment_combo.get()
+            
+            if selected not in self.appointments_map:
+                messagebox.showerror('Validation Error', 'Please select an appointment.')
+                return
+            
+            appt = self.appointments_map[selected]
+            appt_id = appt['Appointment_ID']
+            patient_id = appt['Patient_ID']
             days_before_str = self.days_before.get().strip()
 
-            if not appt_id or not patient_id or not days_before_str:
-                messagebox.showerror('Validation Error', 'All fields are required.')
+            if not days_before_str:
+                messagebox.showerror('Validation Error', 'Please select days before appointment.')
                 return
 
             days_before = int(days_before_str)
@@ -71,13 +129,20 @@ class RemindersFrame(ctk.CTkFrame):
 
             self.reminder_manager.create_reminder(appt_id, patient_id, reminder_date.strftime('%Y-%m-%d'), '09:00')
             messagebox.showinfo('Success', 'Reminder created successfully.')
-            self.appointment_id.delete(0, 'end')
-            self.patient_id.delete(0, 'end')
+            self.appointment_combo.set('Select Appointment')
+            self.patient_info_label.configure(text='Select an appointment first')
             self.view_reminders()
         except ValueError:
             messagebox.showerror('Validation Error', '"Days Before" must be a number.')
         except Exception as e:
             messagebox.showerror('Error', str(e))
+
+    def refresh_data(self):
+        """Refresh appointments list and reminders"""
+        self.appointment_combo.configure(values=self.get_appointments_list())
+        self.appointment_combo.set('Select Appointment')
+        self.patient_info_label.configure(text='Select an appointment first')
+        self.view_reminders()
 
     def view_reminders(self):
         try:

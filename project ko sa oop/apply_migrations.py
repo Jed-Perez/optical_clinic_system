@@ -6,8 +6,6 @@ logger = setup_logging(__name__)
 
 
 def apply_migrations():
-    """Apply all pending database migrations."""
-    
     try:
         db = Database(raise_on_error=True)
         migration = DatabaseMigration(db)

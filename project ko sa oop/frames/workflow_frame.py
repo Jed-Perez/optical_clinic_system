@@ -87,7 +87,7 @@ class WorkflowFrame(BaseFrame):
         left.pack(side='left', fill='both', expand=False, padx=0, pady=0)
         left.pack_propagate(False)
         
-        ctk.CTkLabel(left, text='Add New Patient', font=FONT_TITLE_MEDIUM).pack(pady=PADDING_NORMAL, padx=PADDING_LARGE)
+        ctk.CTkLabel(left, text='Add New Patient', font=('Segoe UI', 20, 'bold')).pack(pady=15, padx=PADDING_LARGE)
         
         scroll_frame = ctk.CTkScrollableFrame(left, fg_color="transparent")
         scroll_frame.pack(fill='both', expand=True, padx=0, pady=0)
@@ -95,172 +95,192 @@ class WorkflowFrame(BaseFrame):
         frm = ctk.CTkFrame(scroll_frame, fg_color="transparent")
         frm.pack(padx=PADDING_LARGE, pady=PADDING_SMALL, fill='x')
         
-        ctk.CTkLabel(frm, text='Surname', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.reg_surname = ctk.CTkEntry(frm, placeholder_text='Last name', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
+        ctk.CTkLabel(frm, text='Surname', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(10, 5))
+        self.reg_surname = ctk.CTkEntry(frm, placeholder_text='Last name', height=45, font=('Segoe UI', 14))
         self.reg_surname.pack(fill='x', pady=(0, 10))
         
-        ctk.CTkLabel(frm, text='First Name', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.reg_firstname = ctk.CTkEntry(frm, placeholder_text='First name', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
+        ctk.CTkLabel(frm, text='First Name', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.reg_firstname = ctk.CTkEntry(frm, placeholder_text='First name', height=45, font=('Segoe UI', 14))
         self.reg_firstname.pack(fill='x', pady=(0, 10))
         
-        ctk.CTkLabel(frm, text='Middle Initial', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.reg_middleinit = ctk.CTkEntry(frm, placeholder_text='Middle initial', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
+        ctk.CTkLabel(frm, text='Middle Initial', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.reg_middleinit = ctk.CTkEntry(frm, placeholder_text='Middle initial', height=45, font=('Segoe UI', 14))
         self.reg_middleinit.pack(fill='x', pady=(0, 10))
         
-        ctk.CTkLabel(frm, text='Age', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.reg_age = ctk.CTkEntry(frm, placeholder_text='Age', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
+        ctk.CTkLabel(frm, text='Age', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.reg_age = ctk.CTkEntry(frm, placeholder_text='Age', height=45, font=('Segoe UI', 14))
         self.reg_age.pack(fill='x', pady=(0, 10))
         
-        ctk.CTkLabel(frm, text='Gender', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.reg_gender = ctk.CTkComboBox(frm, values=GENDERS, state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
+        ctk.CTkLabel(frm, text='Gender', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.reg_gender = ctk.CTkComboBox(frm, values=GENDERS, state='readonly', height=45, font=('Segoe UI', 14))
         self.reg_gender.pack(fill='x', pady=(0, 10))
         
-        ctk.CTkLabel(frm, text='Contact', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.reg_contact = ctk.CTkEntry(frm, placeholder_text='Phone number', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
+        ctk.CTkLabel(frm, text='Contact', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.reg_contact = ctk.CTkEntry(frm, placeholder_text='Phone number', height=45, font=('Segoe UI', 14))
         self.reg_contact.pack(fill='x', pady=(0, 10))
         
-        ctk.CTkLabel(frm, text='Address', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.reg_address = ctk.CTkEntry(frm, placeholder_text='Address', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
+        ctk.CTkLabel(frm, text='Address', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.reg_address = ctk.CTkEntry(frm, placeholder_text='Address', height=45, font=('Segoe UI', 14))
         self.reg_address.pack(fill='x', pady=(0, 10))
         
-        ctk.CTkLabel(frm, text='Email', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.reg_email = ctk.CTkEntry(frm, placeholder_text='Email', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
+        ctk.CTkLabel(frm, text='Email', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.reg_email = ctk.CTkEntry(frm, placeholder_text='Email', height=45, font=('Segoe UI', 14))
         self.reg_email.pack(fill='x', pady=(0, 20))
         
-        ctk.CTkButton(frm, text=f'{ICON_ADD} Register Patient', command=self.register_patient, height=BUTTON_HEIGHT, font=FONT_BUTTON, fg_color=BTN_SUCCESS).pack(fill='x', pady=PADDING_SMALL)
+        ctk.CTkButton(frm, text=f'{ICON_ADD} Register Patient', command=self.register_patient, height=50, font=('Segoe UI', 14, 'bold'), fg_color=BTN_SUCCESS).pack(fill='x', pady=10)
         
-        ctk.CTkLabel(frm, text="", fg_color=COLOR_SEPARATOR, height=1).pack(fill='x', padx=0, pady=PADDING_NORMAL)
+        ctk.CTkLabel(frm, text="", fg_color=COLOR_SEPARATOR, height=2).pack(fill='x', padx=0, pady=15)
         
-        ctk.CTkLabel(frm, text='Delete Patient', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_NORMAL, 3))
-        self.delete_patient_id = ctk.CTkEntry(frm, placeholder_text='Enter Patient ID to delete', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
+        ctk.CTkLabel(frm, text='Delete Patient', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(10, 5))
+        self.delete_patient_id = ctk.CTkEntry(frm, placeholder_text='Enter Patient ID to delete', height=45, font=('Segoe UI', 14))
         self.delete_patient_id.pack(fill='x', pady=(0, 10))
         
-        ctk.CTkButton(frm, text=f'{ICON_DELETE} Delete Patient', command=self.delete_patient, height=BUTTON_HEIGHT, font=FONT_BUTTON, fg_color=BTN_DANGER).pack(fill='x', pady=PADDING_SMALL)
+        ctk.CTkButton(frm, text=f'{ICON_DELETE} Delete Patient', command=self.delete_patient, height=50, font=('Segoe UI', 14, 'bold'), fg_color=BTN_DANGER).pack(fill='x', pady=10)
         
         right = ctk.CTkFrame(self.content_frame, fg_color=COLOR_PANEL_BG)
         right.pack(side='right', fill='both', expand=True, padx=PADDING_NORMAL, pady=0)
         
-        ctk.CTkLabel(right, text='Recent Patients', font=FONT_TITLE_MEDIUM).pack(anchor='w', padx=PADDING_LARGE, pady=(PADDING_NORMAL, PADDING_SMALL))
+        ctk.CTkLabel(right, text='Recent Patients', font=('Segoe UI', 20, 'bold')).pack(anchor='w', padx=PADDING_LARGE, pady=(15, 10))
         
-        self.patient_textbox = ctk.CTkTextbox(right, font=FONT_MONO_SMALL, fg_color=COLOR_TEXT_BG, height=300)
+        self.patient_textbox = ctk.CTkTextbox(right, font=('Consolas', 14), fg_color=COLOR_TEXT_BG, height=300)
         self.patient_textbox.pack(fill='both', expand=True, padx=PADDING_LARGE, pady=(0, PADDING_NORMAL))
         
-        ctk.CTkButton(right, text='Select Patient for Examination', command=self.select_patient_for_examination, height=BUTTON_HEIGHT, font=FONT_BUTTON, fg_color=BTN_INFO).pack(fill='x', padx=PADDING_LARGE, pady=(0, PADDING_NORMAL))
+        ctk.CTkButton(right, text='Select Patient for Examination', command=self.select_patient_for_examination, height=50, font=('Segoe UI', 14, 'bold'), fg_color=BTN_INFO).pack(fill='x', padx=PADDING_LARGE, pady=(0, PADDING_NORMAL))
         
         self.load_patients()
 
     def build_examination_step(self):
-        left = ctk.CTkFrame(self.content_frame, fg_color=COLOR_PANEL_BG, width=LEFT_PANEL_WIDTH)
-        left.pack(side='left', fill='both', expand=False, padx=0, pady=0)
-        left.pack_propagate(False)
+        main_container = ctk.CTkFrame(self.content_frame, fg_color=COLOR_PANEL_BG)
+        main_container.pack(fill='both', expand=True, padx=0, pady=0)
         
-        ctk.CTkLabel(left, text='Eye Examination', font=FONT_TITLE_MEDIUM).pack(pady=PADDING_NORMAL, padx=PADDING_LARGE)
-        
-        scroll_frame = ctk.CTkScrollableFrame(left, fg_color="transparent")
-        scroll_frame.pack(fill='both', expand=True, padx=0, pady=0)
+        scroll_frame = ctk.CTkScrollableFrame(main_container, fg_color="transparent")
+        scroll_frame.pack(fill='both', expand=True, padx=PADDING_LARGE, pady=PADDING_LARGE)
         
         frm = ctk.CTkFrame(scroll_frame, fg_color="transparent")
-        frm.pack(padx=PADDING_LARGE, pady=PADDING_SMALL, fill='x')
+        frm.pack(fill='both', expand=True, padx=20, pady=10)
 
-        ctk.CTkLabel(frm, text='Select Patient *', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
+        ctk.CTkLabel(frm, text='Select Patient *', font=('Segoe UI', 16, 'bold')).pack(anchor='w', pady=(10, 5))
         self.exam_patient_list = self.get_patients_list()
-        self.exam_patient = ctk.CTkComboBox(frm, values=self.exam_patient_list, state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL, command=self.on_patient_selected)
+        self.exam_patient = ctk.CTkComboBox(frm, values=self.exam_patient_list, state='readonly', height=45, font=('Segoe UI', 14), command=self.on_patient_selected)
         self.exam_patient.pack(fill='x', pady=(0, 10))
         
-        self.exam_patient_info = ctk.CTkLabel(frm, text='', font=FONT_LABEL_SMALL, justify='left')
-        self.exam_patient_info.pack(anchor='w', padx=PADDING_LARGE, pady=PADDING_SMALL)
+        self.exam_patient_info = ctk.CTkLabel(frm, text='', font=('Segoe UI', 13), justify='left')
+        self.exam_patient_info.pack(anchor='w', padx=10, pady=10)
         
-        ctk.CTkLabel(frm, text="", fg_color=COLOR_SEPARATOR, height=1).pack(fill='x', padx=0, pady=PADDING_SMALL)
+        ctk.CTkLabel(frm, text="", fg_color=COLOR_SEPARATOR, height=2).pack(fill='x', padx=0, pady=15)
         
-        ctk.CTkLabel(frm, text='Examining Doctor *', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.exam_doctor = ctk.CTkComboBox(frm, values=self.get_doctors_list(), state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
-        self.exam_doctor.pack(fill='x', pady=(0, 15))
+        ctk.CTkLabel(frm, text='Examining Doctor *', font=('Segoe UI', 16, 'bold')).pack(anchor='w', pady=(10, 5))
+        self.exam_doctor = ctk.CTkComboBox(frm, values=self.get_doctors_list(), state='readonly', height=45, font=('Segoe UI', 14))
+        self.exam_doctor.pack(fill='x', pady=(0, 20))
         
-        ctk.CTkLabel(frm, text='OD (Right Eye)', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
+        ctk.CTkLabel(frm, text='OD (Right Eye) - Prescription', font=('Segoe UI', 18, 'bold'), text_color=("#2980b9", "#3498db")).pack(anchor='w', pady=(15, 10))
         
         od_frame = ctk.CTkFrame(frm, fg_color="transparent")
-        od_frame.pack(fill='x', pady=(0, 10))
-        ctk.CTkLabel(od_frame, text='SPH:', font=FONT_LABEL_SMALL).pack(side='left', padx=(0, 5))
-        self.od_sphere = ctk.CTkEntry(od_frame, placeholder_text='+/-', height=32, width=60, font=FONT_LABEL_NORMAL)
-        self.od_sphere.pack(side='left', padx=5)
-        ctk.CTkLabel(od_frame, text='CYL:', font=FONT_LABEL_SMALL).pack(side='left', padx=(10, 5))
-        self.od_cylinder = ctk.CTkEntry(od_frame, placeholder_text='+/-', height=32, width=60, font=FONT_LABEL_NORMAL)
-        self.od_cylinder.pack(side='left', padx=5)
+        od_frame.pack(fill='x', pady=(0, 20))
         
-        ctk.CTkLabel(frm, text='OS (Left Eye)', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_NORMAL, 3))
+        od_left = ctk.CTkFrame(od_frame, fg_color="transparent")
+        od_left.pack(side='left', fill='x', expand=True, padx=(0, 10))
+        ctk.CTkLabel(od_left, text='SPH (Sphere)', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(0, 5))
+        self.od_sphere = ctk.CTkEntry(od_left, placeholder_text='e.g., -2.00, +1.50', height=50, font=('Segoe UI', 16))
+        self.od_sphere.pack(fill='x')
+        
+        od_right = ctk.CTkFrame(od_frame, fg_color="transparent")
+        od_right.pack(side='left', fill='x', expand=True, padx=(10, 0))
+        ctk.CTkLabel(od_right, text='CYL (Cylinder)', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(0, 5))
+        self.od_cylinder = ctk.CTkEntry(od_right, placeholder_text='e.g., -0.75, +0.50', height=50, font=('Segoe UI', 16))
+        self.od_cylinder.pack(fill='x')
+        
+        ctk.CTkLabel(frm, text='OS (Left Eye) - Prescription', font=('Segoe UI', 18, 'bold'), text_color=("#27ae60", "#2ecc71")).pack(anchor='w', pady=(20, 10))
         
         os_frame = ctk.CTkFrame(frm, fg_color="transparent")
-        os_frame.pack(fill='x', pady=(0, 10))
-        ctk.CTkLabel(os_frame, text='SPH:', font=FONT_LABEL_SMALL).pack(side='left', padx=(0, 5))
-        self.os_sphere = ctk.CTkEntry(os_frame, placeholder_text='+/-', height=32, width=60, font=FONT_LABEL_NORMAL)
-        self.os_sphere.pack(side='left', padx=5)
-        ctk.CTkLabel(os_frame, text='CYL:', font=FONT_LABEL_SMALL).pack(side='left', padx=(10, 5))
-        self.os_cylinder = ctk.CTkEntry(os_frame, placeholder_text='+/-', height=32, width=60, font=FONT_LABEL_NORMAL)
-        self.os_cylinder.pack(side='left', padx=5)
+        os_frame.pack(fill='x', pady=(0, 20))
         
-        ctk.CTkLabel(frm, text='Diagnosis', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_NORMAL, 3))
-        self.exam_diagnosis = ctk.CTkEntry(frm, placeholder_text='e.g., Myopia, Hyperopia, Astigmatism', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
-        self.exam_diagnosis.pack(fill='x', pady=(0, 10))
+        os_left = ctk.CTkFrame(os_frame, fg_color="transparent")
+        os_left.pack(side='left', fill='x', expand=True, padx=(0, 10))
+        ctk.CTkLabel(os_left, text='SPH (Sphere)', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(0, 5))
+        self.os_sphere = ctk.CTkEntry(os_left, placeholder_text='e.g., -2.00, +1.50', height=50, font=('Segoe UI', 16))
+        self.os_sphere.pack(fill='x')
         
-        ctk.CTkLabel(frm, text='Clinical Notes', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.exam_notes = ctk.CTkTextbox(frm, font=FONT_MONO, fg_color=COLOR_TEXT_BG, height=120)
+        os_right = ctk.CTkFrame(os_frame, fg_color="transparent")
+        os_right.pack(side='left', fill='x', expand=True, padx=(10, 0))
+        ctk.CTkLabel(os_right, text='CYL (Cylinder)', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(0, 5))
+        self.os_cylinder = ctk.CTkEntry(os_right, placeholder_text='e.g., -0.75, +0.50', height=50, font=('Segoe UI', 16))
+        self.os_cylinder.pack(fill='x')
+        
+        ctk.CTkLabel(frm, text="", fg_color=COLOR_SEPARATOR, height=2).pack(fill='x', padx=0, pady=20)
+        
+        ctk.CTkLabel(frm, text='Diagnosis *', font=('Segoe UI', 16, 'bold')).pack(anchor='w', pady=(10, 5))
+        diagnosis_values = [
+            'Myopia (Nearsightedness)',
+            'Hyperopia (Farsightedness)',
+            'Astigmatism',
+            'Presbyopia',
+            'Myopia with Astigmatism',
+            'Hyperopia with Astigmatism',
+            'Emmetropia (Normal Vision)',
+            'Amblyopia (Lazy Eye)',
+            'Strabismus (Eye Misalignment)',
+            'Cataracts',
+            'Glaucoma',
+            'Dry Eye Syndrome',
+            'Conjunctivitis',
+            'Keratoconus',
+            'Retinal Detachment',
+            'Macular Degeneration',
+            'Diabetic Retinopathy',
+            'Other - See Notes'
+        ]
+        self.exam_diagnosis = ctk.CTkComboBox(frm, values=diagnosis_values, state='readonly', height=50, font=('Segoe UI', 16))
+        self.exam_diagnosis.set('Select Diagnosis')
+        self.exam_diagnosis.pack(fill='x', pady=(0, 20))
+        
+        ctk.CTkLabel(frm, text='Clinical Notes', font=('Segoe UI', 16, 'bold')).pack(anchor='w', pady=(10, 5))
+        self.exam_notes = ctk.CTkTextbox(frm, font=('Segoe UI', 14), fg_color=COLOR_TEXT_BG, height=120)
         self.exam_notes.pack(fill='x', pady=(0, 20))
     
-        ctk.CTkLabel(frm, text='Vision Test Results', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_NORMAL, 3))
+        ctk.CTkLabel(frm, text='Vision Test Results', font=('Segoe UI', 18, 'bold')).pack(anchor='w', pady=(20, 10))
         
-        ctk.CTkLabel(frm, text='Uncorrected Vision OD (Right)', font=FONT_LABEL_SMALL).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.va_od_before = ctk.CTkComboBox(frm, values=['20/20', '20/30', '20/40', '20/50', '20/60', '20/100'], state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
-        self.va_od_before.pack(fill='x', pady=(0, 10))
+        vision_grid = ctk.CTkFrame(frm, fg_color="transparent")
+        vision_grid.pack(fill='x', pady=(0, 20))
         
-        ctk.CTkLabel(frm, text='Corrected Vision OD (Right)', font=FONT_LABEL_SMALL).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.va_od_after = ctk.CTkComboBox(frm, values=['20/20', '20/25', '20/30', '20/40', '20/50'], state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
-        self.va_od_after.pack(fill='x', pady=(0, 10))
+        vision_left = ctk.CTkFrame(vision_grid, fg_color="transparent")
+        vision_left.pack(side='left', fill='both', expand=True, padx=(0, 10))
         
-        ctk.CTkLabel(frm, text='Uncorrected Vision OS (Left)', font=FONT_LABEL_SMALL).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.va_os_before = ctk.CTkComboBox(frm, values=['20/20', '20/30', '20/40', '20/50', '20/60', '20/100'], state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
-        self.va_os_before.pack(fill='x', pady=(0, 10))
+        ctk.CTkLabel(vision_left, text='OD Uncorrected Vision', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.va_od_before = ctk.CTkComboBox(vision_left, values=['20/20', '20/30', '20/40', '20/50', '20/60', '20/100'], state='readonly', height=45, font=('Segoe UI', 14))
+        self.va_od_before.pack(fill='x', pady=(0, 15))
         
-        ctk.CTkLabel(frm, text='Corrected Vision OS (Left)', font=FONT_LABEL_SMALL).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.va_os_after = ctk.CTkComboBox(frm, values=['20/20', '20/25', '20/30', '20/40', '20/50'], state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
-        self.va_os_after.pack(fill='x', pady=(0, 10))
+        ctk.CTkLabel(vision_left, text='OD Corrected Vision', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.va_od_after = ctk.CTkComboBox(vision_left, values=['20/20', '20/25', '20/30', '20/40', '20/50'], state='readonly', height=45, font=('Segoe UI', 14))
+        self.va_od_after.pack(fill='x', pady=(0, 15))
         
-        ctk.CTkLabel(frm, text='Color Vision Test', font=FONT_LABEL_SMALL).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.color_vision = ctk.CTkComboBox(frm, values=['Normal', 'Deficient', 'Color Blind'], state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
-        self.color_vision.pack(fill='x', pady=(0, 10))
+        vision_right = ctk.CTkFrame(vision_grid, fg_color="transparent")
+        vision_right.pack(side='left', fill='both', expand=True, padx=(10, 0))
         
-        ctk.CTkLabel(frm, text='Intraocular Pressure (IOP)', font=FONT_LABEL_SMALL).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.iop = ctk.CTkEntry(frm, placeholder_text='e.g., 16 mmHg', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
-        self.iop.pack(fill='x', pady=(0, 20))
+        ctk.CTkLabel(vision_right, text='OS Uncorrected Vision', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.va_os_before = ctk.CTkComboBox(vision_right, values=['20/20', '20/30', '20/40', '20/50', '20/60', '20/100'], state='readonly', height=45, font=('Segoe UI', 14))
+        self.va_os_before.pack(fill='x', pady=(0, 15))
         
-        ctk.CTkButton(frm, text=f'{ICON_ADD} Complete Exam & Add to Bill', command=self.complete_examination, height=BUTTON_HEIGHT, font=FONT_BUTTON, fg_color=BTN_SUCCESS).pack(fill='x', pady=PADDING_SMALL)
-   
-        right = ctk.CTkFrame(self.content_frame, fg_color=COLOR_PANEL_BG)
-        right.pack(side='right', fill='both', expand=True, padx=PADDING_NORMAL, pady=0)
+        ctk.CTkLabel(vision_right, text='OS Corrected Vision', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.va_os_after = ctk.CTkComboBox(vision_right, values=['20/20', '20/25', '20/30', '20/40', '20/50'], state='readonly', height=45, font=('Segoe UI', 14))
+        self.va_os_after.pack(fill='x', pady=(0, 15))
         
-        ctk.CTkLabel(right, text='Eye Examination', font=FONT_TITLE_MEDIUM).pack(anchor='w', padx=PADDING_LARGE, pady=PADDING_NORMAL)
+        additional_tests = ctk.CTkFrame(frm, fg_color="transparent")
+        additional_tests.pack(fill='x', pady=(10, 20))
         
-        info_text = """
-EXAMINATION PROCESS:
-
-1. Select the patient
-2. Select the examining doctor
-3. Enter optical prescription:
-   • SPH (Sphere): +/- power
-   • CYL (Cylinder): for astigmatism
-   
-4. Record diagnosis & notes
-5. Enter vision test results
-6. Measure IOP
-7. Click "Complete Exam"
-   → Exam cost (₱500) auto-added to billing
-   → Prescription saved
-   → Vision tests recorded
-   → Move to Billing step
-
-PRICING:
-Eye Examination: ₱500
-        """
-        ctk.CTkLabel(right, text=info_text, font=FONT_LABEL_SMALL, justify='left').pack(anchor='nw', padx=PADDING_LARGE, pady=PADDING_NORMAL)
+        test_left = ctk.CTkFrame(additional_tests, fg_color="transparent")
+        test_left.pack(side='left', fill='x', expand=True, padx=(0, 10))
+        ctk.CTkLabel(test_left, text='Color Vision Test', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.color_vision = ctk.CTkComboBox(test_left, values=['Normal', 'Deficient', 'Color Blind'], state='readonly', height=45, font=('Segoe UI', 14))
+        self.color_vision.pack(fill='x')
+        
+        test_right = ctk.CTkFrame(additional_tests, fg_color="transparent")
+        test_right.pack(side='left', fill='x', expand=True, padx=(10, 0))
+        ctk.CTkLabel(test_right, text='Intraocular Pressure (IOP)', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.iop = ctk.CTkEntry(test_right, placeholder_text='e.g., 16 mmHg', height=45, font=('Segoe UI', 14))
+        self.iop.pack(fill='x')
+        
+        ctk.CTkButton(frm, text=f'{ICON_ADD} Complete Examination & Add ₱500 to Bill', command=self.complete_examination, height=55, font=('Segoe UI', 16, 'bold'), fg_color=BTN_SUCCESS).pack(fill='x', pady=(30, 20))
 
     def build_procedures_step(self):
         pass
@@ -270,7 +290,7 @@ Eye Examination: ₱500
         left.pack(side='left', fill='both', expand=False, padx=0, pady=0)
         left.pack_propagate(False)
         
-        ctk.CTkLabel(left, text='Billing Management', font=FONT_TITLE_MEDIUM).pack(pady=PADDING_NORMAL, padx=PADDING_LARGE)
+        ctk.CTkLabel(left, text='Billing Management', font=('Segoe UI', 20, 'bold')).pack(pady=15, padx=PADDING_LARGE)
         
         scroll_frame = ctk.CTkScrollableFrame(left, fg_color="transparent")
         scroll_frame.pack(fill='both', expand=True, padx=0, pady=0)
@@ -278,138 +298,131 @@ Eye Examination: ₱500
         frm = ctk.CTkFrame(scroll_frame, fg_color="transparent")
         frm.pack(padx=PADDING_LARGE, pady=PADDING_SMALL, fill='x')
         
-        ctk.CTkLabel(frm, text='Select Patient *', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
+        ctk.CTkLabel(frm, text='Select Patient *', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(10, 5))
         self.billing_patient_list = self.get_patients_list()
-        self.billing_patient = ctk.CTkComboBox(frm, values=self.billing_patient_list, state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL, command=self.on_billing_patient_selected)
+        self.billing_patient = ctk.CTkComboBox(frm, values=self.billing_patient_list, state='readonly', height=45, font=('Segoe UI', 14), command=self.on_billing_patient_selected)
         self.billing_patient.pack(fill='x', pady=(0, 10))
         
-        self.billing_patient_info = ctk.CTkLabel(frm, text='', font=FONT_LABEL_SMALL, justify='left')
-        self.billing_patient_info.pack(anchor='w', padx=PADDING_LARGE, pady=PADDING_SMALL)
+        self.billing_patient_info = ctk.CTkLabel(frm, text='', font=('Segoe UI', 13), justify='left')
+        self.billing_patient_info.pack(anchor='w', padx=10, pady=10)
         
-        ctk.CTkLabel(frm, text="", fg_color=COLOR_SEPARATOR, height=1).pack(fill='x', padx=0, pady=PADDING_SMALL)
+        ctk.CTkLabel(frm, text="", fg_color=COLOR_SEPARATOR, height=2).pack(fill='x', padx=0, pady=10)
        
-        ctk.CTkLabel(frm, text='Add Additional Charges', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_NORMAL, 3))
+        ctk.CTkLabel(frm, text='Add Additional Charges', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(10, 5))
         
-        ctk.CTkLabel(frm, text='Service Type', font=FONT_LABEL_SMALL).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.additional_service = ctk.CTkComboBox(frm, values=['Contact Lens Fitting', 'Visual Field Test', 'Fundus Exam', 'Retinal Imaging', 'Other'], state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
+        ctk.CTkLabel(frm, text='Service Type', font=('Segoe UI', 13)).pack(anchor='w', pady=(5, 5))
+        self.additional_service = ctk.CTkComboBox(frm, values=['Contact Lens Fitting', 'Visual Field Test', 'Fundus Exam', 'Retinal Imaging', 'Other'], state='readonly', height=45, font=('Segoe UI', 14))
         self.additional_service.pack(fill='x', pady=(0, 10))
         
-        ctk.CTkLabel(frm, text='Amount (₱)', font=FONT_LABEL_SMALL).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.additional_amount = ctk.CTkEntry(frm, placeholder_text='500-2000', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
+        ctk.CTkLabel(frm, text='Amount (₱)', font=('Segoe UI', 13)).pack(anchor='w', pady=(5, 5))
+        self.additional_amount = ctk.CTkEntry(frm, placeholder_text='500-2000', height=45, font=('Segoe UI', 14))
         self.additional_amount.pack(fill='x', pady=(0, 10))
         
-        ctk.CTkLabel(frm, text='Description', font=FONT_LABEL_SMALL).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.additional_notes = ctk.CTkTextbox(frm, font=FONT_MONO_SMALL, fg_color=COLOR_TEXT_BG, height=60)
+        ctk.CTkLabel(frm, text='Description', font=('Segoe UI', 13)).pack(anchor='w', pady=(5, 5))
+        self.additional_notes = ctk.CTkTextbox(frm, font=('Segoe UI', 13), fg_color=COLOR_TEXT_BG, height=80)
         self.additional_notes.pack(fill='x', pady=(0, 20))
         
-        ctk.CTkButton(frm, text=f'{ICON_ADD} Add Charge', command=self.add_billing_charge, height=BUTTON_HEIGHT, font=FONT_BUTTON, fg_color=BTN_SUCCESS).pack(fill='x', pady=PADDING_SMALL)
+        ctk.CTkButton(frm, text=f'{ICON_ADD} Add Charge', command=self.add_billing_charge, height=50, font=('Segoe UI', 14, 'bold'), fg_color=BTN_SUCCESS).pack(fill='x', pady=10)
         
         right = ctk.CTkFrame(self.content_frame, fg_color=COLOR_PANEL_BG)
         right.pack(side='right', fill='both', expand=True, padx=PADDING_NORMAL, pady=0)
         
-        ctk.CTkLabel(right, text='Bill Summary', font=FONT_TITLE_MEDIUM).pack(anchor='w', padx=PADDING_LARGE, pady=PADDING_NORMAL)
+        ctk.CTkLabel(right, text='Bill Summary', font=('Segoe UI', 20, 'bold')).pack(anchor='w', padx=PADDING_LARGE, pady=15)
         
-        self.bill_textbox = ctk.CTkTextbox(right, font=FONT_MONO_SMALL, fg_color=COLOR_TEXT_BG, height=300)
+        self.bill_textbox = ctk.CTkTextbox(right, font=('Consolas', 14), fg_color=COLOR_TEXT_BG, height=300)
         self.bill_textbox.pack(fill='both', expand=True, padx=PADDING_LARGE, pady=PADDING_SMALL)
        
         button_frame = ctk.CTkFrame(right, fg_color="transparent")
         button_frame.pack(fill='x', padx=PADDING_LARGE, pady=PADDING_NORMAL)
         
-        ctk.CTkButton(button_frame, text='Refresh Bills', command=self.refresh_billing_summary, height=BUTTON_HEIGHT, font=FONT_BUTTON, fg_color=BTN_INFO).pack(side='left', fill='x', expand=True, padx=(0, 5))
-        ctk.CTkButton(button_frame, text='Apply Discount', command=self.apply_bill_discount, height=BUTTON_HEIGHT, font=FONT_BUTTON, fg_color=BTN_WARNING).pack(side='left', fill='x', expand=True, padx=(5, 0))
+        ctk.CTkButton(button_frame, text='Refresh Bills', command=self.refresh_billing_summary, height=50, font=('Segoe UI', 14, 'bold'), fg_color=BTN_INFO).pack(side='left', fill='x', expand=True, padx=(0, 5))
+        ctk.CTkButton(button_frame, text='Apply Discount', command=self.apply_bill_discount, height=50, font=('Segoe UI', 14, 'bold'), fg_color=BTN_WARNING).pack(side='left', fill='x', expand=True, padx=(5, 0))
 
     def build_sales_step(self):
-        left = ctk.CTkFrame(self.content_frame, fg_color=COLOR_PANEL_BG, width=LEFT_PANEL_WIDTH)
-        left.pack(side='left', fill='both', expand=False, padx=0, pady=0)
-        left.pack_propagate(False)
+        scroll_container = ctk.CTkScrollableFrame(self.content_frame, fg_color="transparent")
+        scroll_container.pack(fill='both', expand=True, padx=0, pady=0)
         
-        ctk.CTkLabel(left, text='Sales Management', font=FONT_TITLE_MEDIUM).pack(pady=PADDING_NORMAL, padx=PADDING_LARGE)
+        frm = ctk.CTkFrame(scroll_container, fg_color="transparent")
+        frm.pack(fill='both', expand=True, padx=PADDING_LARGE, pady=PADDING_LARGE)
         
-        scroll_frame = ctk.CTkScrollableFrame(left, fg_color="transparent")
-        scroll_frame.pack(fill='both', expand=True, padx=0, pady=0)
+        ctk.CTkLabel(frm, text='Sales Management', font=('Segoe UI', 24, 'bold')).pack(anchor='w', pady=(0, 20))
         
-        frm = ctk.CTkFrame(scroll_frame, fg_color="transparent")
-        frm.pack(padx=PADDING_LARGE, pady=PADDING_SMALL, fill='x')
-        
-        ctk.CTkLabel(frm, text='Select Patient *', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
+        ctk.CTkLabel(frm, text='Select Patient *', font=('Segoe UI', 16, 'bold')).pack(anchor='w', pady=(10, 5))
         self.sales_patient_list = self.get_patients_list()
-        self.sales_patient = ctk.CTkComboBox(frm, values=self.sales_patient_list, state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL, command=self.on_sales_patient_selected)
-        self.sales_patient.pack(fill='x', pady=(0, 10))
+        self.sales_patient = ctk.CTkComboBox(frm, values=self.sales_patient_list, state='readonly', height=50, font=('Segoe UI', 16), command=self.on_sales_patient_selected)
+        self.sales_patient.pack(fill='x', pady=(0, 15))
         
-        self.sales_patient_info = ctk.CTkLabel(frm, text='', font=FONT_LABEL_SMALL, justify='left')
-        self.sales_patient_info.pack(anchor='w', padx=PADDING_LARGE, pady=PADDING_SMALL)
+        self.sales_patient_info = ctk.CTkLabel(frm, text='', font=('Segoe UI', 14), justify='left')
+        self.sales_patient_info.pack(anchor='w', padx=10, pady=(0, 15))
         
-        ctk.CTkLabel(frm, text="", fg_color=COLOR_SEPARATOR, height=1).pack(fill='x', padx=0, pady=PADDING_SMALL)
+        ctk.CTkLabel(frm, text="", fg_color=COLOR_SEPARATOR, height=2).pack(fill='x', padx=0, pady=15)
         
-        ctk.CTkLabel(frm, text='Add Product to Sale', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_NORMAL, 3))
+        ctk.CTkLabel(frm, text='Add Product to Sale', font=('Segoe UI', 18, 'bold')).pack(anchor='w', pady=(10, 15))
         
-        ctk.CTkLabel(frm, text='Product Category *', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.product_category = ctk.CTkComboBox(frm, values=['Glasses', 'Frames', 'Lenses', 'Contact Lenses', 'Eye Care Products', 'Cleaning Solutions', 'Cases & Accessories', 'Reading Glasses', 'Sunglasses', 'Blue Light Glasses'], state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL, command=self.on_category_selected)
+        ctk.CTkLabel(frm, text='Product Category *', font=('Segoe UI', 16, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.product_category = ctk.CTkComboBox(frm, values=['Glasses', 'Frames', 'Lenses', 'Contact Lenses', 'Eye Care Products', 'Cleaning Solutions', 'Cases & Accessories', 'Reading Glasses', 'Sunglasses', 'Blue Light Glasses'], state='readonly', height=50, font=('Segoe UI', 16), command=self.on_category_selected)
         self.product_category.set('Glasses')
-        self.product_category.pack(fill='x', pady=(0, 10))
+        self.product_category.pack(fill='x', pady=(0, 15))
         
         self.dynamic_fields_container = ctk.CTkFrame(frm, fg_color="transparent")
         self.dynamic_fields_container.pack(fill='x', pady=(0, 10))
         
         self.glasses_fields_frame = ctk.CTkFrame(self.dynamic_fields_container, fg_color="transparent")
         
-        ctk.CTkLabel(self.glasses_fields_frame, text='Select Glasses Product (Optional)', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.glasses_product_combo = ctk.CTkComboBox(self.glasses_fields_frame, values=[], state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL, command=self.on_glasses_product_selected)
+        ctk.CTkLabel(self.glasses_fields_frame, text='Select Glasses Product (Optional)', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.glasses_product_combo = ctk.CTkComboBox(self.glasses_fields_frame, values=[], state='readonly', height=50, font=('Segoe UI', 16), command=self.on_glasses_product_selected)
         self.glasses_product_combo.set('Select from inventory or enter manually')
-        self.glasses_product_combo.pack(fill='x', pady=(0, 10))
+        self.glasses_product_combo.pack(fill='x', pady=(0, 15))
         
-        ctk.CTkLabel(self.glasses_fields_frame, text='Frame Type', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.frame_type = ctk.CTkComboBox(self.glasses_fields_frame, values=['Full Frame', 'Half Frame', 'Rimless', 'Cat Eye', 'Oversized'], state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
-        self.frame_type.pack(fill='x', pady=(0, 10))
+        ctk.CTkLabel(self.glasses_fields_frame, text='Frame Type', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.frame_type = ctk.CTkComboBox(self.glasses_fields_frame, values=['Full Frame', 'Half Frame', 'Rimless', 'Cat Eye', 'Oversized'], state='readonly', height=50, font=('Segoe UI', 16))
+        self.frame_type.pack(fill='x', pady=(0, 15))
         
-        ctk.CTkLabel(self.glasses_fields_frame, text='Lens Type', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.lens_type = ctk.CTkComboBox(self.glasses_fields_frame, values=['Single Vision', 'Bifocal', 'Progressive'], state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
-        self.lens_type.pack(fill='x', pady=(0, 10))
+        ctk.CTkLabel(self.glasses_fields_frame, text='Lens Type', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.lens_type = ctk.CTkComboBox(self.glasses_fields_frame, values=['Single Vision', 'Bifocal', 'Progressive'], state='readonly', height=50, font=('Segoe UI', 16))
+        self.lens_type.pack(fill='x', pady=(0, 15))
         
-        ctk.CTkLabel(self.glasses_fields_frame, text='Lens Coating', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.lens_coating = ctk.CTkComboBox(self.glasses_fields_frame, values=['Standard', 'Anti-Glare', 'UV Protection', 'Blue Light', 'Transition'], state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
-        self.lens_coating.pack(fill='x', pady=(0, 10))
+        ctk.CTkLabel(self.glasses_fields_frame, text='Lens Coating', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.lens_coating = ctk.CTkComboBox(self.glasses_fields_frame, values=['Standard', 'Anti-Glare', 'UV Protection', 'Blue Light', 'Transition'], state='readonly', height=50, font=('Segoe UI', 16))
+        self.lens_coating.pack(fill='x', pady=(0, 15))
 
         self.generic_fields_frame = ctk.CTkFrame(self.dynamic_fields_container, fg_color="transparent")
         
-        ctk.CTkLabel(self.generic_fields_frame, text='Select Product', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.product_name_combo = ctk.CTkComboBox(self.generic_fields_frame, values=[], state='readonly', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL, command=self.on_product_name_selected)
+        ctk.CTkLabel(self.generic_fields_frame, text='Select Product', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.product_name_combo = ctk.CTkComboBox(self.generic_fields_frame, values=[], state='readonly', height=50, font=('Segoe UI', 16), command=self.on_product_name_selected)
         self.product_name_combo.set('Select Product')
-        self.product_name_combo.pack(fill='x', pady=(0, 10))
+        self.product_name_combo.pack(fill='x', pady=(0, 15))
         self.product_map = {}
         
-        ctk.CTkLabel(self.generic_fields_frame, text='Description', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.product_description = ctk.CTkEntry(self.generic_fields_frame, placeholder_text='Product description', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL, state='readonly')
-        self.product_description.pack(fill='x', pady=(0, 10))
+        ctk.CTkLabel(self.generic_fields_frame, text='Description', font=('Segoe UI', 14, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.product_description = ctk.CTkEntry(self.generic_fields_frame, placeholder_text='Product description', height=50, font=('Segoe UI', 16), state='readonly')
+        self.product_description.pack(fill='x', pady=(0, 15))
         
         self.glasses_fields_frame.pack(fill='x', pady=0)
         
         self.load_products_by_category('Glasses')
         
-        ctk.CTkLabel(frm, text='Quantity *', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.product_quantity = ctk.CTkEntry(frm, placeholder_text='1', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
+        ctk.CTkLabel(frm, text='Quantity *', font=('Segoe UI', 16, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.product_quantity = ctk.CTkEntry(frm, placeholder_text='1', height=50, font=('Segoe UI', 16))
         self.product_quantity.insert(0, '1')
-        self.product_quantity.pack(fill='x', pady=(0, 10))
+        self.product_quantity.pack(fill='x', pady=(0, 15))
         
-        ctk.CTkLabel(frm, text='Price (₱) *', font=FONT_LABEL_BOLD).pack(anchor='w', pady=(PADDING_SMALL, 3))
-        self.product_price = ctk.CTkEntry(frm, placeholder_text='Enter price', height=ENTRY_HEIGHT, font=FONT_LABEL_NORMAL)
-        self.product_price.pack(fill='x', pady=(0, 15))
+        ctk.CTkLabel(frm, text='Price (₱) *', font=('Segoe UI', 16, 'bold')).pack(anchor='w', pady=(5, 5))
+        self.product_price = ctk.CTkEntry(frm, placeholder_text='Enter price', height=50, font=('Segoe UI', 16))
+        self.product_price.pack(fill='x', pady=(0, 20))
         
-        ctk.CTkButton(frm, text=f'{ICON_ADD} Add to Sale', command=self.add_product_to_sales, height=BUTTON_HEIGHT, font=FONT_BUTTON, fg_color=BTN_SUCCESS).pack(fill='x', pady=PADDING_SMALL)
+        button_container = ctk.CTkFrame(frm, fg_color="transparent")
+        button_container.pack(fill='x', pady=(10, 0))
         
-        right = ctk.CTkFrame(self.content_frame, fg_color=COLOR_PANEL_BG)
-        right.pack(side='right', fill='both', expand=True, padx=PADDING_NORMAL, pady=0)
+        ctk.CTkButton(button_container, text=f'{ICON_ADD} Add to Sale', command=self.add_product_to_sales, height=55, font=('Segoe UI', 16, 'bold'), fg_color=BTN_SUCCESS).pack(side='left', fill='x', expand=True, padx=(0, 5))
+        ctk.CTkButton(button_container, text='Complete Sale', command=self.complete_sales_visit, height=55, font=('Segoe UI', 16, 'bold'), fg_color=BTN_PRIMARY).pack(side='left', fill='x', expand=True, padx=(5, 0))
         
-        ctk.CTkLabel(right, text='Sales Summary', font=FONT_TITLE_MEDIUM).pack(anchor='w', padx=PADDING_LARGE, pady=PADDING_NORMAL)
+        ctk.CTkLabel(frm, text="", fg_color=COLOR_SEPARATOR, height=2).pack(fill='x', padx=0, pady=20)
         
-        self.sales_summary_textbox = ctk.CTkTextbox(right, font=FONT_MONO_SMALL, fg_color=COLOR_TEXT_BG, height=300)
-        self.sales_summary_textbox.pack(fill='both', expand=True, padx=PADDING_LARGE, pady=PADDING_SMALL)
+        ctk.CTkLabel(frm, text='Sales Summary', font=('Segoe UI', 18, 'bold')).pack(anchor='w', pady=(10, 10))
         
-        button_frame = ctk.CTkFrame(right, fg_color="transparent")
-        button_frame.pack(fill='x', padx=PADDING_LARGE, pady=PADDING_NORMAL)
-        
-        ctk.CTkButton(button_frame, text='Refresh Sales', command=self.refresh_sales_summary, height=BUTTON_HEIGHT, font=FONT_BUTTON, fg_color=BTN_INFO).pack(side='left', fill='x', expand=True, padx=(0, 5))
-        ctk.CTkButton(button_frame, text='Complete Sale', command=self.complete_sales_visit, height=BUTTON_HEIGHT, font=FONT_BUTTON, fg_color=BTN_SUCCESS).pack(side='left', fill='x', expand=True, padx=(5, 0))
+        self.sales_summary_textbox = ctk.CTkTextbox(frm, font=('Consolas', 14), fg_color=COLOR_TEXT_BG, height=250)
+        self.sales_summary_textbox.pack(fill='x', pady=(0, 10))
 
     def on_billing_patient_selected(self, selected=None):
         try:
@@ -991,7 +1004,9 @@ Notes: {notes}
         if category == 'Glasses':
             self.glasses_fields_frame.pack(fill='x', pady=0)
             self.load_products_by_category(category)
+        else:
             self.generic_fields_frame.pack(fill='x', pady=0)
+            self.load_products_by_category(category)
     
     def load_products_by_category(self, category):
         try:
@@ -1146,7 +1161,24 @@ Notes: {notes}
                 
                 item_query = "INSERT INTO sales_products (name, category, description, price, quantity) VALUES (%s, %s, %s, %s, %s)"
                 self.sm.db.execute(item_query, (product_name, category, f"Sale #{sale_id} - {patient_name}", price, quantity))
-                
+
+                # --- Add to billing automatically ---
+                if hasattr(self, 'billing_patient_info_obj') and self.billing_patient_info_obj:
+                    billing_patient_id = self.billing_patient_info_obj['Patient_ID']
+                else:
+                    # Try to get patient ID from sales_patient_info_obj
+                    billing_patient_id = self.sales_patient_info_obj.get('Patient_ID')
+                if billing_patient_id:
+                    self.bm.add_billing(
+                        patient_id=billing_patient_id,
+                        amount=total_price,
+                        service=f"{product_name} (Sales)",
+                        method='Sales',
+                        status='Pending'
+                    )
+                    if hasattr(self, 'bill_textbox'):
+                        self.refresh_billing_summary()
+
                 self.show_success('Success', f'Sale recorded successfully!\n\n{product_name}\nQty: {quantity} × ₱{price:.2f} = ₱{total_price:.2f}\n\nSale ID: #{sale_id}')
                 
             except Exception as e:

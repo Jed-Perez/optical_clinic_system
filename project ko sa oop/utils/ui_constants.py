@@ -19,6 +19,7 @@ BTN_WARNING = ("#f39c12", "#d68910")
 BTN_DANGER = ("#e74c3c", "#c0392b")
 BTN_INFO = ("#3498db", "#2980b9")
 BTN_DEFAULT = ("#3498db", "#2980b9")
+BTN_PRIMARY = ("#2980b9", "#1a5276")  # (light, dark)
 
 #COLORS - FRAMES 
 COLOR_HEADER_BG = ("white", "#1a1a1a")

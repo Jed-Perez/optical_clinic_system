@@ -3,24 +3,33 @@ from datetime import datetime, timedelta
 from utils.constants import *
 from utils.logger import setup_logging
 from utils.password_manager import PasswordManager
+from backend.base_manager import BaseManager
 
 logger = setup_logging(__name__)
 
-class PatientManager:
+class PatientManager(BaseManager):
     def __init__(self, db: Database):
-        self.db = db
+        super().__init__(db)
+        self.table_name = "patients"
+        self.archived_table_name = "archived_patients"
+        self.id_column = "Patient_ID"
+    
+    def validate_input(self, **kwargs):
+        """Validate patient input data"""
+        if 'surname' in kwargs and (not kwargs['surname'] or not kwargs['surname'].strip()):
+            raise ValueError('Surname is required')
+        if 'firstname' in kwargs and (not kwargs['firstname'] or not kwargs['firstname'].strip()):
+            raise ValueError('First Name is required')
+        if 'gender' in kwargs and (not kwargs['gender'] or not kwargs['gender'].strip()):
+            raise ValueError('Gender is required')
+        if 'age_group' in kwargs and (not kwargs['age_group'] or not kwargs['age_group'].strip()):
+            raise ValueError('Age Group is required')
+        if 'contact' in kwargs and (not kwargs['contact'] or not kwargs['contact'].strip()):
+            raise ValueError('Contact is required')
+        return True
 
     def add_patient(self, surname, firstname, middleinitial, age, gender, age_group, address, contact, email, medical_history):
-        if not surname or not surname.strip():
-            raise ValueError('Surname is required')
-        if not firstname or not firstname.strip():
-            raise ValueError('First Name is required')
-        if not gender or not gender.strip():
-            raise ValueError('Gender is required')
-        if not age_group or not age_group.strip():
-            raise ValueError('Age Group is required')
-        if not contact or not contact.strip():
-            raise ValueError('Contact is required')
+        self.validate_input(surname=surname, firstname=firstname, gender=gender, age_group=age_group, contact=contact)
 
         q = "INSERT INTO patients (Surname, FirstName, MiddleInitial, Age, Gender, Age_Group, Address, Contact, Email, Medical_History, Registration_Date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, CURDATE())"
         return self.db.execute(q, (surname.strip(), firstname.strip(), middleinitial.strip(), age or None, gender.strip(), age_group.strip(), address.strip(), contact.strip(), email.strip(), medical_history.strip()))
@@ -43,49 +52,32 @@ class PatientManager:
         return result[0]['count'] if result else 0
 
     def archive_patient(self, patient_id):
-        # Explicitly list columns to make the query more robust against schema changes.
-        # This assumes 'archived_patients' has the same columns as 'patients' plus 'Deleted_On'.
-        archive_query = """
-            INSERT INTO archived_patients (Patient_ID, Surname, FirstName, MiddleInitial, Age, Gender, Age_Group, Address, Contact, Email, Medical_History, Deleted_On)
-            SELECT Patient_ID, Surname, FirstName, MiddleInitial, Age, Gender, Age_Group, Address, Contact, Email, Medical_History, NOW()
-            FROM patients WHERE Patient_ID=%s
-        """
-        self.db.execute(archive_query, (patient_id,))
-        self.db.execute('DELETE FROM patients WHERE Patient_ID=%s', (patient_id,))
+        return self.archive(patient_id)
 
     def delete_patient(self, patient_id):
-        """Alias for archive_patient for UI convenience"""
         return self.archive_patient(patient_id)
 
-    def list_archived(self):
-        # Combine name parts for display from archived table
-        query = "SELECT *, CONCAT(Surname, ', ', FirstName, ' ', COALESCE(MiddleInitial, '')) AS Name FROM archived_patients ORDER BY Deleted_On DESC"
-        return self.db.fetch(query)
-
-    def restore(self, patient_id):
-        row = self.db.fetch('SELECT * FROM archived_patients WHERE Patient_ID=%s', (patient_id,))
-        if not row:
-            return None
-        r = row[0]
-        # Use new name fields for insertion, handling NULL values
-        self.db.execute('INSERT INTO patients (Surname, FirstName, MiddleInitial, Age, Gender, Age_Group, Address, Contact, Email, Medical_History) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                        (r.get('Surname', ''), r.get('FirstName', ''), r.get('MiddleInitial', ''), r['Age'], r['Gender'], r.get('Age_Group', 'Adult'), r['Address'], r['Contact'], r['Email'], r['Medical_History']))
-        self.db.execute('DELETE FROM archived_patients WHERE Patient_ID=%s', (patient_id,))
-        return True
-
-class DoctorManager:
+class DoctorManager(BaseManager):
     def __init__(self, db: Database):
-        self.db = db
-    def add_doctor(self, surname, firstname, middle_initial, license_no, specialization, contact, schedule):
-        # Validate required fields
-        if not surname or not surname.strip():
+        super().__init__(db)
+        self.table_name = "doctors"
+        self.archived_table_name = "archived_doctors"
+        self.id_column = "Doctor_ID"
+    
+    def validate_input(self, **kwargs):
+        #Validate doctor input data
+        if 'surname' in kwargs and (not kwargs['surname'] or not kwargs['surname'].strip()):
             raise ValueError('Doctor surname is required')
-        if not firstname or not firstname.strip():
+        if 'firstname' in kwargs and (not kwargs['firstname'] or not kwargs['firstname'].strip()):
             raise ValueError('Doctor first name is required')
-        if not license_no or not license_no.strip():
+        if 'license_no' in kwargs and (not kwargs['license_no'] or not kwargs['license_no'].strip()):
             raise ValueError('License number is required')
-        if not specialization or not specialization.strip():
+        if 'specialization' in kwargs and (not kwargs['specialization'] or not kwargs['specialization'].strip()):
             raise ValueError('Specialization is required')
+        return True
+    
+    def add_doctor(self, surname, firstname, middle_initial, license_no, specialization, contact, schedule):
+        self.validate_input(surname=surname, firstname=firstname, license_no=license_no, specialization=specialization)
         
         # Format full name: Surname, FirstName M.I.
         if middle_initial and middle_initial.strip():
@@ -97,36 +89,36 @@ class DoctorManager:
         return self.db.execute(q, (surname.strip(), firstname.strip(), middle_initial.strip() if middle_initial else '', full_name, license_no.strip(), specialization.strip(), contact.strip() if contact else '', schedule.strip() if schedule else ''))
     def list_doctors(self):
         return self.db.fetch('SELECT * FROM doctors ORDER BY Doctor_ID DESC')
+    
     def archive_doctor(self, doctor_id):
-        self.db.execute('INSERT INTO archived_doctors SELECT *, NOW() FROM doctors WHERE Doctor_ID=%s', (doctor_id,))
-        self.db.execute('DELETE FROM doctors WHERE Doctor_ID=%s', (doctor_id,))
+        """Polymorphic override - uses BaseManager's generic archive method"""
+        return self.archive(doctor_id)
+    
     def delete_doctor(self, doctor_id):
         """Alias for archive_doctor for UI convenience"""
         return self.archive_doctor(doctor_id)
-    def list_archived(self):
-        return self.db.fetch('SELECT * FROM archived_doctors ORDER BY Deleted_On DESC')
-    def restore(self, doctor_id):
-        row = self.db.fetch('SELECT * FROM archived_doctors WHERE Doctor_ID=%s', (doctor_id,))
-        if not row: return None
-        r = row[0]
-        self.db.execute('INSERT INTO doctors (Surname, FirstName, MiddleInitial, Name, License_No, Specialization, Contact, Schedule) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
-                        (r.get('Surname', ''), r.get('FirstName', ''), r.get('MiddleInitial', ''), r['Name'], r['License_No'], r['Specialization'], r.get('Contact', ''), r.get('Schedule', '')))
-        self.db.execute('DELETE FROM archived_doctors WHERE Doctor_ID=%s', (doctor_id,))
-        return True
 
-class AppointmentManager:
+class AppointmentManager(BaseManager):
     def __init__(self, db: Database):
-        self.db = db
-    def schedule(self, patient_id, doctor_id, date, time):
-        # Validate required fields
-        if not patient_id or not str(patient_id).strip():
+        super().__init__(db)
+        self.table_name = "appointments"
+        self.archived_table_name = "archived_appointments"
+        self.id_column = "Appointment_ID"
+    
+    def validate_input(self, **kwargs):
+        """Validate appointment input data"""
+        if 'patient_id' in kwargs and (not kwargs['patient_id'] or not str(kwargs['patient_id']).strip()):
             raise ValueError('Patient ID is required')
-        if not doctor_id or not str(doctor_id).strip():
+        if 'doctor_id' in kwargs and (not kwargs['doctor_id'] or not str(kwargs['doctor_id']).strip()):
             raise ValueError('Doctor ID is required')
-        if not date or not str(date).strip():
+        if 'date' in kwargs and (not kwargs['date'] or not str(kwargs['date']).strip()):
             raise ValueError('Date is required (YYYY-MM-DD format)')
-        if not time or not str(time).strip():
+        if 'time' in kwargs and (not kwargs['time'] or not str(kwargs['time']).strip()):
             raise ValueError('Time is required (HH:MM format)')
+        return True
+    
+    def schedule(self, patient_id, doctor_id, date, time):
+        self.validate_input(patient_id=patient_id, doctor_id=doctor_id, date=date, time=time)
         
         try:
             existing = self.db.fetch('SELECT * FROM appointments WHERE Doctor_ID=%s AND Appointment_Date=%s AND Appointment_Time=%s AND Status=%s',
@@ -155,53 +147,25 @@ class AppointmentManager:
             logger.error(f"Failed to mark appointment as done: {str(e)}")
             raise
 
-    def archive(self, appointment_id):
-        """Archive an appointment record."""
-        try:
-            # Explicitly list columns to ensure correct mapping and prevent errors
-            archive_query = """
-                INSERT INTO archived_appointments (Appointment_ID, Patient_ID, Doctor_ID, Appointment_Date, Appointment_Time, Status, Deleted_On)
-                SELECT Appointment_ID, Patient_ID, Doctor_ID, Appointment_Date, Appointment_Time, Status, NOW()
-                FROM appointments WHERE Appointment_ID=%s"""
-            self.db.execute(archive_query, (appointment_id,))
-            self.db.execute('DELETE FROM appointments WHERE Appointment_ID=%s', (appointment_id,))
-            logger.info(f"Appointment {appointment_id} archived")
-            return True
-        except Exception as e:
-            logger.error(f"Failed to archive appointment: {str(e)}")
-            raise
-    
-    def list_archived(self):
-        return self.db.fetch('SELECT * FROM archived_appointments ORDER BY Deleted_On DESC')
-    
-    def restore(self, appointment_id):
-        """Restore an archived appointment."""
-        try:
-            row = self.db.fetch('SELECT * FROM archived_appointments WHERE Appointment_ID=%s', (appointment_id,))
-            if not row:
-                raise ValueError(f"Archived appointment {appointment_id} not found")
-            
-            r = row[0]
-            self.db.execute('INSERT INTO appointments (Patient_ID, Doctor_ID, Appointment_Date, Appointment_Time, Status) VALUES (%s,%s,%s,%s,%s)',
-                            (r['Patient_ID'], r['Doctor_ID'], r['Appointment_Date'], r['Appointment_Time'], r['Status']))
-            self.db.execute('DELETE FROM archived_appointments WHERE Appointment_ID=%s', (appointment_id,))
-            logger.info(f"Appointment {appointment_id} restored")
-            return True
-        except Exception as e:
-            logger.error(f"Failed to restore appointment: {str(e)}")
-            raise
-
-class InventoryManager:
+class InventoryManager(BaseManager):
     def __init__(self, db: Database):
-        self.db = db
-    def add_item(self, name, category, quantity, unit_price, supplier):
-        # Validate required fields
-        if not name or not name.strip():
+        super().__init__(db)
+        self.table_name = "inventory"
+        self.archived_table_name = "archived_inventory"
+        self.id_column = "Inventory_ID"
+    
+    def validate_input(self, **kwargs):
+        """Validate inventory input data"""
+        if 'name' in kwargs and (not kwargs['name'] or not kwargs['name'].strip()):
             raise ValueError('Item name is required')
-        if not category or not category.strip():
+        if 'category' in kwargs and (not kwargs['category'] or not kwargs['category'].strip()):
             raise ValueError('Category is required')
-        if quantity is None or quantity == '':
+        if 'quantity' in kwargs and (kwargs['quantity'] is None or kwargs['quantity'] == ''):
             raise ValueError('Quantity is required')
+        return True
+    
+    def add_item(self, name, category, quantity, unit_price, supplier):
+        self.validate_input(name=name, category=category, quantity=quantity)
         
         return self.db.execute('INSERT INTO inventory (Item_Name, Category, Quantity_On_Hand, Unit_Price, Supplier) VALUES (%s,%s,%s,%s,%s)',
                                (name.strip(), category.strip(), quantity, unit_price, supplier.strip()))
@@ -210,20 +174,6 @@ class InventoryManager:
 
     def view_all_products(self):
         return self.list_items()
-
-    def archive(self, item_id):
-        self.db.execute('INSERT INTO archived_inventory SELECT *, NOW() FROM inventory WHERE Inventory_ID=%s', (item_id,))
-        self.db.execute('DELETE FROM inventory WHERE Inventory_ID=%s', (item_id,))
-    def list_archived(self):
-        return self.db.fetch('SELECT * FROM archived_inventory ORDER BY Deleted_On DESC')
-    def restore(self, item_id):
-        row = self.db.fetch('SELECT * FROM archived_inventory WHERE Inventory_ID=%s', (item_id,))
-        if not row: return None
-        r = row[0]
-        self.db.execute('INSERT INTO inventory (Item_Name, Category, Quantity_On_Hand, Unit_Price, Supplier) VALUES (%s,%s,%s,%s,%s)',
-                        (r['Item_Name'], r['Category'], r['Quantity_On_Hand'], r['Unit_Price'], r['Supplier']))
-        self.db.execute('DELETE FROM archived_inventory WHERE Inventory_ID=%s', (item_id,))
-        return True
 
 class BillingManager:
     def __init__(self, db: Database):
@@ -397,7 +347,6 @@ class SalesManager:
         return self.db.fetch("SELECT si.*, sp.name FROM sale_items si JOIN sales_products sp ON si.product_id = sp.id WHERE si.sale_id = %s", (sale_id,))
 
     def get_sales_report(self):
-        # Query sales_products table directly (since we're not using sale_items)
         return self.db.fetch("SELECT category, COUNT(*) as count, SUM(quantity) as total_qty, AVG(price) as avg_price FROM sales_products GROUP BY category")
 
 
@@ -408,7 +357,6 @@ class PrescriptionManager:
     def create_prescription(self, patient_id, doctor_id, appointment_id, 
                            od_sph, od_cyl, od_axis, od_add,
                            os_sph, os_cyl, os_axis, os_add, notes):
-        """Create new prescription"""
         if not patient_id or not doctor_id:
             raise ValueError('Patient ID and Doctor ID are required')
         
@@ -431,7 +379,6 @@ class PrescriptionManager:
             raise
 
     def get_patient_prescriptions(self, patient_id):
-        """Get all prescriptions for a patient"""
         query = """SELECT p.*, d.Name as Doctor_Name 
                    FROM prescriptions p 
                    JOIN doctors d ON p.Doctor_ID = d.Doctor_ID 
@@ -440,7 +387,6 @@ class PrescriptionManager:
         return self.db.fetch(query, (patient_id,))
 
     def get_latest_prescription(self, patient_id):
-        """Get most recent valid prescription"""
         query = """SELECT * FROM prescriptions 
                    WHERE Patient_ID = %s AND Expiry_Date >= CURDATE()
                    ORDER BY Issued_Date DESC LIMIT 1"""
@@ -448,7 +394,6 @@ class PrescriptionManager:
         return result[0] if result else None
 
     def get_all_prescriptions(self):
-        """List all prescriptions"""
         query = """SELECT p.*, CONCAT(pa.Surname, ', ', pa.FirstName) as Patient_Name, d.Name as Doctor_Name
                    FROM prescriptions p
                    JOIN patients pa ON p.Patient_ID = pa.Patient_ID
@@ -458,7 +403,6 @@ class PrescriptionManager:
 
     def update_prescription(self, prescription_id, od_sph, od_cyl, od_axis, od_add,
                            os_sph, os_cyl, os_axis, os_add, notes):
-        """Update prescription details"""
         query = """UPDATE prescriptions 
                    SET OD_Sphere=%s, OD_Cylinder=%s, OD_Axis=%s, OD_Add=%s,
                        OS_Sphere=%s, OS_Cylinder=%s, OS_Axis=%s, OS_Add=%s, Notes=%s
@@ -467,11 +411,9 @@ class PrescriptionManager:
                                        os_sph, os_cyl, os_axis, os_add, notes, prescription_id))
 
     def delete_prescription(self, prescription_id):
-        """Delete prescription"""
         return self.db.execute("DELETE FROM prescriptions WHERE Prescription_ID = %s", (prescription_id,))
 
     def check_expiring_prescriptions(self):
-        """Get prescriptions expiring in next 30 days"""
         query = """SELECT * FROM prescriptions 
                    WHERE Expiry_Date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY)
                    ORDER BY Expiry_Date ASC"""
@@ -539,7 +481,6 @@ class ReminderManager:
         self.db = db
 
     def create_reminder(self, appointment_id, patient_id, reminder_date, reminder_time, contact_method='SMS'):
-        """Create appointment reminder"""
         if not appointment_id or not patient_id:
             raise ValueError('Appointment ID and Patient ID are required')
         
@@ -549,7 +490,6 @@ class ReminderManager:
         return self.db.execute(query, (appointment_id, patient_id, reminder_date, reminder_time, contact_method))
 
     def get_pending_reminders(self):
-        """Get all pending reminders"""
         query = """SELECT ar.*, pa.Contact, pa.Email, CONCAT(pa.Surname, ', ', pa.FirstName) as Name, ap.Appointment_Time
                    FROM appointment_reminders ar
                    JOIN patients pa ON ar.Patient_ID = pa.Patient_ID
@@ -559,21 +499,18 @@ class ReminderManager:
         return self.db.fetch(query)
 
     def mark_sent(self, reminder_id):
-        """Mark reminder as sent"""
         query = """UPDATE appointment_reminders 
                    SET Status = 'Sent', Sent_Date = NOW()
                    WHERE Reminder_ID = %s"""
         return self.db.execute(query, (reminder_id,))
 
     def get_appointment_reminders(self, appointment_id):
-        """Get all reminders for an appointment"""
         query = """SELECT * FROM appointment_reminders 
                    WHERE Appointment_ID = %s 
                    ORDER BY Reminder_Date ASC"""
         return self.db.fetch(query, (appointment_id,))
 
     def delete_reminder(self, reminder_id):
-        """Delete reminder"""
         return self.db.execute("DELETE FROM appointment_reminders WHERE Reminder_ID = %s", (reminder_id,))
 
 
@@ -582,7 +519,6 @@ class InvoiceManager:
         self.db = db
 
     def create_invoice(self, sale_id, patient_id, generated_by):
-        """Create invoice from sale"""
         from datetime import date
         
         try:
@@ -603,7 +539,6 @@ class InvoiceManager:
             raise
 
     def get_all_invoices(self):
-        """List all invoices"""
         query = """SELECT i.*, CONCAT(pa.Surname, ', ', pa.FirstName) as Patient_Name
                    FROM invoices i
                    LEFT JOIN patients pa ON i.Patient_ID = pa.Patient_ID
@@ -611,7 +546,6 @@ class InvoiceManager:
         return self.db.fetch(query)
 
     def get_invoice_details(self, invoice_id):
-        """Get invoice with items"""
         query = """SELECT i.*, CONCAT(pa.Surname, ', ', pa.FirstName) as Patient_Name, pa.Contact, pa.Email, s.customer_name
                    FROM invoices i 
                    LEFT JOIN patients pa ON i.Patient_ID = pa.Patient_ID
@@ -620,7 +554,6 @@ class InvoiceManager:
         return self.db.fetch(query, (invoice_id,))[0] if self.db.fetch(query, (invoice_id,)) else None
 
     def get_invoice_items(self, sale_id):
-        """Get items in invoice"""
         query = """SELECT si.*, sp.name 
                    FROM sale_items si 
                    JOIN sales_products sp ON si.product_id = sp.id 
@@ -628,11 +561,9 @@ class InvoiceManager:
         return self.db.fetch(query, (sale_id,))
 
     def mark_invoice_paid(self, invoice_id):
-        """Mark invoice as paid"""
         return self.db.execute("UPDATE invoices SET Status = 'Paid' WHERE Invoice_ID = %s", (invoice_id,))
 
     def get_invoices_by_patient(self, patient_id):
-        """Get all invoices for patient"""
         query = """SELECT * FROM invoices 
                    WHERE Patient_ID = %s 
                    ORDER BY Invoice_Date DESC"""

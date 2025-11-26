@@ -11,6 +11,7 @@ from frames.inventory_frame import InventoryFrame
 from frames.followup_frame import FollowUpFrame
 from frames.workflow_frame import WorkflowFrame
 from frames.appointments_frame import AppointmentsFrame
+from frames.reminders_frame import RemindersFrame
 from utils.alert_system import AlertSystem
 from utils.password_manager import PasswordManager
 from utils.logger import setup_logging
@@ -436,6 +437,7 @@ class MainApp(ctk.CTk):
             ('🛒 Sales', self.show_sales),
             ('📦 Inventory', self.show_inventory),
             ('📅 Schedule Follow-up', self.show_followup),
+            ('🔔 Reminders', self.show_reminders),
             ('📊 Reports', self.show_reports),
             ('📑 Archive', self.show_archive),
         ]
@@ -477,6 +479,7 @@ class MainApp(ctk.CTk):
         self.frames['followup'] = FollowUpFrame(self.content, managers)
         self.frames['reports'] = ReportsFrame(self.content, managers)
         self.frames['archive'] = ArchiveFrame(self.content, managers)
+        self.frames['reminders'] = RemindersFrame(self.content, managers)
 
         self.show_dashboard()
 
@@ -518,6 +521,9 @@ class MainApp(ctk.CTk):
     def show_archive(self):
         self.hide_all()
         self.frames['archive'].pack(fill='both',expand=True)
+    def show_reminders(self):
+        self.hide_all()
+        self.frames['reminders'].pack(fill='both',expand=True)
     def logout(self):
         self.destroy()
         main()

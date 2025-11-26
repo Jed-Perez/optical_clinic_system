@@ -38,14 +38,13 @@ class AppointmentsFrame(ctk.CTkFrame):
         frm = ctk.CTkFrame(scroll_frame, fg_color="transparent")
         frm.pack(padx=20, pady=10, fill='x')
 
-        # Form fields
-        ctk.CTkLabel(frm, text='Patient ID', font=('Segoe UI', 12, 'bold')).pack(anchor='w', pady=(10, 3))
-        self.patient_id = ctk.CTkEntry(frm, placeholder_text='Enter Patient ID', height=35, font=('Segoe UI', 12))
-        self.patient_id.pack(fill='x', pady=(0, 10))
+        ctk.CTkLabel(frm, text='Select Patient', font=('Segoe UI', 12, 'bold')).pack(anchor='w', pady=(10, 3))
+        self.patient_combo = ctk.CTkComboBox(frm, values=self.get_patients_list(), state='readonly', height=35, font=('Segoe UI', 12))
+        self.patient_combo.pack(fill='x', pady=(0, 10))
 
-        ctk.CTkLabel(frm, text='Doctor ID', font=('Segoe UI', 12, 'bold')).pack(anchor='w', pady=(10, 3))
-        self.doctor_id = ctk.CTkEntry(frm, placeholder_text='Enter Doctor ID', height=35, font=('Segoe UI', 12))
-        self.doctor_id.pack(fill='x', pady=(0, 10))
+        ctk.CTkLabel(frm, text='Select Doctor', font=('Segoe UI', 12, 'bold')).pack(anchor='w', pady=(10, 3))
+        self.doctor_combo = ctk.CTkComboBox(frm, values=self.get_doctors_list(), state='readonly', height=35, font=('Segoe UI', 12))
+        self.doctor_combo.pack(fill='x', pady=(0, 10))
 
         # Date Picker
         ctk.CTkLabel(frm, text='Appointment Date', font=('Segoe UI', 12, 'bold')).pack(anchor='w', pady=(10, 3))
@@ -89,16 +88,14 @@ class AppointmentsFrame(ctk.CTkFrame):
         ctk.CTkButton(btn_frm, text='➕ Schedule Appointment', command=self.schedule_appointment, height=40, font=('Segoe UI', 12, 'bold'), fg_color=("#27ae60", "#1e8449")).pack(fill='x', pady=5)
         ctk.CTkButton(btn_frm, text='🔄 Refresh List', command=self.view_appointments, height=40, font=('Segoe UI', 12, 'bold')).pack(fill='x', pady=5)
 
-        # Delete section
-        ctk.CTkLabel(frm, text='Cancel Appointment by ID', font=('Segoe UI', 12, 'bold')).pack(anchor='w', pady=(15, 3))
-        self.delete_id = ctk.CTkEntry(frm, placeholder_text='Enter Appointment ID to cancel', height=35, font=('Segoe UI', 12))
-        self.delete_id.pack(fill='x', pady=(0, 10))
+        ctk.CTkLabel(frm, text='Cancel Appointment', font=('Segoe UI', 12, 'bold')).pack(anchor='w', pady=(15, 3))
+        self.delete_combo = ctk.CTkComboBox(frm, values=[], state='readonly', height=35, font=('Segoe UI', 12))
+        self.delete_combo.pack(fill='x', pady=(0, 10))
         ctk.CTkButton(frm, text='🗑️ Cancel Appointment', command=self.delete_appointment, height=40, font=('Segoe UI', 12, 'bold'), fg_color=("#e74c3c", "#c0392b")).pack(fill='x', pady=5)
 
-        # Mark as Done section
         ctk.CTkLabel(frm, text='Mark Appointment as Done', font=('Segoe UI', 12, 'bold')).pack(anchor='w', pady=(15, 3))
-        self.done_id = ctk.CTkEntry(frm, placeholder_text='Enter Appointment ID to mark as done', height=35, font=('Segoe UI', 12))
-        self.done_id.pack(fill='x', pady=(0, 10))
+        self.done_combo = ctk.CTkComboBox(frm, values=[], state='readonly', height=35, font=('Segoe UI', 12))
+        self.done_combo.pack(fill='x', pady=(0, 10))
         ctk.CTkButton(frm, text='✔️ Mark as Done', command=self.mark_as_done, height=40, font=('Segoe UI', 12, 'bold'), fg_color=("#2ecc71", "#27ae60")).pack(fill='x', pady=5)
 
         # Right panel - Display area
@@ -130,14 +127,61 @@ class AppointmentsFrame(ctk.CTkFrame):
             print(f"Error updating days: {e}")
             self.day_combo.configure(values=[str(i) for i in range(1, 32)])
 
+    def get_patients_list(self):
+        try:
+            patients = self.patient_manager.list_patients()
+            if not patients:
+                return ['No patients found']
+            patient_list = []
+            for p in patients:
+                display = f"{p['Patient_ID']}: {p['Surname']}, {p['FirstName']}"
+                patient_list.append(display)
+            return patient_list
+        except:
+            return ['Error loading patients']
+
+    def get_doctors_list(self):
+        try:
+            doctors = self.doctor_manager.list_doctors()
+            if not doctors:
+                return ['No doctors found']
+            doctor_list = []
+            for d in doctors:
+                display = f"{d['Doctor_ID']}: {d['Name']}"
+                doctor_list.append(display)
+            return doctor_list
+        except:
+            return ['Error loading doctors']
+
+    def get_appointments_list(self):
+        try:
+            appointments = self.manager.list_appointments()
+            if not appointments:
+                return ['No appointments found']
+            appt_list = []
+            for appt in appointments:
+                appt_id = appt.get('Appointment_ID', '?')
+                patient_id = appt.get('Patient_ID', '?')
+                date = str(appt.get('Appointment_Date', ''))
+                time = str(appt.get('Appointment_Time', ''))
+                status = appt.get('Status', 'N/A')
+                display = f"{appt_id}: Patient {patient_id} - {date} {time} ({status})"
+                appt_list.append(display)
+            return appt_list
+        except:
+            return ['Error loading appointments']
+
     def schedule_appointment(self):
         try:
-            patient_id = self.patient_id.get().strip()
-            doctor_id = self.doctor_id.get().strip()
+            patient_selection = self.patient_combo.get().strip()
+            doctor_selection = self.doctor_combo.get().strip()
 
-            if not patient_id or not doctor_id:
-                messagebox.showerror('Validation Error', 'Patient ID and Doctor ID are required.')
+            if not patient_selection or not doctor_selection or 'No patients' in patient_selection or 'No doctors' in doctor_selection:
+                messagebox.showerror('Validation Error', 'Please select both a patient and a doctor.')
                 return
+
+            patient_id = patient_selection.split(':')[0].strip()
+            doctor_id = doctor_selection.split(':')[0].strip()
 
             year = self.year_var.get()
             month_name = self.month_var.get()
@@ -151,8 +195,6 @@ class AppointmentsFrame(ctk.CTkFrame):
 
             self.manager.schedule(patient_id, doctor_id, date_str, time_str)
             messagebox.showinfo('Success', 'Appointment scheduled successfully')
-            self.patient_id.delete(0, 'end')
-            self.doctor_id.delete(0, 'end')
             self.view_appointments()
         except ValueError as ve:
             messagebox.showerror('Scheduling Conflict', str(ve))
@@ -180,17 +222,35 @@ class AppointmentsFrame(ctk.CTkFrame):
                 status = appt.get('Status', 'N/A')
                 
                 self.txt.insert('end', f"{appt_id:<5} {patient_id:<12} {doctor_id:<12} {date:<15} {time:<10} {status:<15}\n")
+            
+            self.update_appointment_dropdowns()
         except Exception as e:
             messagebox.showerror('Error', f'Failed to load appointments: {str(e)}')
             self.txt.delete('1.0', 'end')
             self.txt.insert('end', f'Error: {str(e)}')
 
+    def update_appointment_dropdowns(self):
+        try:
+            appt_list = self.get_appointments_list()
+            if hasattr(self, 'delete_combo'):
+                self.delete_combo.configure(values=appt_list)
+                if appt_list and 'No appointments' not in appt_list[0]:
+                    self.delete_combo.set(appt_list[0])
+            if hasattr(self, 'done_combo'):
+                self.done_combo.configure(values=appt_list)
+                if appt_list and 'No appointments' not in appt_list[0]:
+                    self.done_combo.set(appt_list[0])
+        except:
+            pass
+
     def delete_appointment(self):
         try:
-            appointment_id = self.delete_id.get().strip()
-            if not appointment_id:
-                messagebox.showerror('Validation Error', 'Appointment ID is required to cancel.')
+            appointment_selection = self.delete_combo.get().strip()
+            if not appointment_selection or 'No appointments' in appointment_selection:
+                messagebox.showerror('Validation Error', 'Please select an appointment to cancel.')
                 return
+
+            appointment_id = appointment_selection.split(':')[0].strip()
 
             if not messagebox.askyesno('Confirm Cancellation', f'Are you sure you want to cancel appointment ID {appointment_id}? This will archive it.'):
                 return
@@ -198,7 +258,6 @@ class AppointmentsFrame(ctk.CTkFrame):
             success = self.manager.archive(appointment_id)
             if success:
                 messagebox.showinfo('Success', f'Appointment {appointment_id} has been cancelled and archived.')
-                self.delete_id.delete(0, 'end')
                 self.view_appointments()
             else:
                 messagebox.showerror('Error', f'Could not cancel appointment {appointment_id}. It may not exist.')
@@ -207,10 +266,12 @@ class AppointmentsFrame(ctk.CTkFrame):
 
     def mark_as_done(self):
         try:
-            appointment_id = self.done_id.get().strip()
-            if not appointment_id:
-                messagebox.showerror('Validation Error', 'Appointment ID is required to mark as done.')
+            appointment_selection = self.done_combo.get().strip()
+            if not appointment_selection or 'No appointments' in appointment_selection:
+                messagebox.showerror('Validation Error', 'Please select an appointment to mark as done.')
                 return
+
+            appointment_id = appointment_selection.split(':')[0].strip()
 
             if not messagebox.askyesno('Confirm Done', f'Are you sure you want to mark appointment ID {appointment_id} as done? This will archive it.'):
                 return
@@ -218,7 +279,6 @@ class AppointmentsFrame(ctk.CTkFrame):
             success = self.manager.mark_as_done(appointment_id)
             if success:
                 messagebox.showinfo('Success', f'Appointment {appointment_id} has been marked as done and archived.')
-                self.done_id.delete(0, 'end')
                 self.view_appointments()
             else:
                 messagebox.showerror('Error', f'Could not mark appointment {appointment_id} as done. It may not exist.')

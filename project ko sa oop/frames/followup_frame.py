@@ -193,35 +193,29 @@ class FollowUpFrame(ctk.CTkFrame):
             if not appointments:
                 self.list_textbox.insert('end', 'No scheduled follow-ups.')
                 return
-            
-            # Display upcoming appointments
             self.list_textbox.insert('end', 'UPCOMING FOLLOW-UPS:\n' + '='*50 + '\n')
-            
             count = 0
             for appt in appointments:
                 try:
-                    patient = self.pm.get_patient_by_id(appt.get('PatientID', appt.get('Patient_ID')))
+                    # Use correct field names from appointments table
+                    patient = self.pm.get_patient(appt.get('Patient_ID'))
                     doctor = None
                     for d in self.dm.list_doctors():
-                        if d['DoctorID'] == appt.get('DoctorID', appt.get('Doctor_ID')):
+                        if d['Doctor_ID'] == appt.get('Doctor_ID'):
                             doctor = d
                             break
-                    
-                    if patient and doctor:
+                    if patient and doctor and appt.get('Status') == 'Scheduled':
                         name = f"{patient['Surname']}, {patient['FirstName']}"
-                        date = appt.get('AppointmentDate', appt.get('Date', 'N/A'))
-                        time = appt.get('AppointmentTime', appt.get('Time', '10:00'))
+                        date = appt.get('Appointment_Date', 'N/A')
+                        time = appt.get('Appointment_Time', '10:00')
                         status = appt.get('Status', 'Pending')
-                        
                         self.list_textbox.insert('end', f"\nPatient: {name}\nDoctor: {doctor['Name']}\nDate: {date} {time}\nStatus: {status}\n{'-'*50}\n")
                         count += 1
                 except Exception as e:
                     logger.error(f"Error displaying appointment: {e}")
                     continue
-            
             if count == 0:
                 self.list_textbox.insert('end', 'No upcoming follow-ups found.')
-                
         except Exception as e:
             logger.error(f"Error loading follow-ups: {e}")
             self.list_textbox.insert('end', f'Error loading appointments: {str(e)}')
